@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Layout from '@/components/Layout';
 import { TreeDeciduous, Leaf, Cloud, Globe, Droplets } from 'lucide-react';
@@ -11,7 +10,7 @@ const AboutPage: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-display font-bold text-nutella-brown mb-6">
-              La Missione <span className="text-nutella-red">Nutella</span> Forest
+              La Missione <span className="inline-flex"><span className="text-black">n</span><span className="text-nutella-red">utella</span></span> Forest
             </h1>
             <p className="text-lg text-gray-700 leading-relaxed">
               Un impegno concreto per il nostro pianeta, un albero alla volta.
