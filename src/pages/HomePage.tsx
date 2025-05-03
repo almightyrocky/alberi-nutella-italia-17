@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TreeDeciduous, Map, ArrowRight, Users, Award } from 'lucide-react';
+import { TreeDeciduous, Map, ArrowRight, Users, Award, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout';
 import { useAuthStore } from '@/stores/authStore';
@@ -113,7 +113,7 @@ const HomePage: React.FC = () => {
             
             <div className="bg-white rounded-lg p-6 shadow-md">
               <div className="flex items-start">
-                <ChartBar className="h-10 w-10 text-nutella-green mt-1 mr-4 flex-shrink-0" />
+                <BarChart className="h-10 w-10 text-nutella-green mt-1 mr-4 flex-shrink-0" />
                 <div>
                   <h3 className="text-xl font-bold mb-3 text-nutella-brown">Impatto Ambientale</h3>
                   <p className="text-gray-700">
