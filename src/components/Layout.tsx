@@ -2,7 +2,7 @@
 import React from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { TreeDeciduous, MapPin, ChartBar, Award, LogIn, User } from 'lucide-react';
+import { TreeDeciduous, MapPin, BarChart, Award, LogIn, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     {
       name: "Impatto",
       path: "/impact",
-      icon: <ChartBar className="h-5 w-5 mr-2" />
+      icon: <BarChart className="h-5 w-5 mr-2" />
     },
     {
       name: "Badges",
