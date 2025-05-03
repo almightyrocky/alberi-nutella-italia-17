@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -185,15 +184,60 @@ const DashboardPage: React.FC = () => {
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {trees.map((tree: Tree) => (
-              <TreeCard 
-                key={tree.id} 
-                tree={tree} 
-                onClick={() => navigate(`/tree/${tree.id}`)} 
-              />
-            ))}
-          </div>
+          <>
+            {/* Map Preview Section */}
+            <div className="mb-8 bg-nutella-beige/20 rounded-lg overflow-hidden">
+              <div className="w-full h-[300px] relative bg-gray-200">
+                <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center relative">
+                  <div className="absolute inset-0 bg-black/20"></div>
+                  
+                  {/* Tree Markers */}
+                  {trees.map((tree) => (
+                    <div
+                      key={tree.id}
+                      className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer animate-bounce-slow"
+                      style={{
+                        left: `${(tree.location.longitude - 6.5) / (18.5 - 6.5) * 100}%`,
+                        top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`,
+                        animationDelay: `${Math.random() * 2}s`
+                      }}
+                      onClick={() => navigate(`/tree/${tree.id}`)}
+                    >
+                      <div className="bg-nutella-green text-white p-2 rounded-full shadow-lg flex items-center justify-center h-10 w-10 hover:scale-110 transition-transform relative z-10">
+                        <TreeDeciduous className="h-6 w-6" />
+                      </div>
+                      <div className="mt-1 bg-white text-nutella-brown px-2 py-0.5 rounded text-xs font-medium shadow-md whitespace-nowrap">
+                        {tree.name}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="p-4 flex justify-between items-center">
+                <div className="text-sm text-nutella-brown">
+                  <strong>Nota:</strong> Clicca su un albero per vedere i dettagli
+                </div>
+                <Button
+                  variant="outline"
+                  className="border-nutella-green text-nutella-green hover:bg-nutella-green/10"
+                  onClick={() => navigate('/map')}
+                >
+                  Vedi mappa completa
+                </Button>
+              </div>
+            </div>
+
+            {/* Tree Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {trees.map((tree: Tree) => (
+                <TreeCard 
+                  key={tree.id} 
+                  tree={tree} 
+                  onClick={() => navigate(`/tree/${tree.id}`)} 
+                />
+              ))}
+            </div>
+          </>
         )}
       </div>
     </Layout>
