@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Users, Award, BarChart } from 'lucide-react';
+import { ArrowRight, Users, Award, BarChart, TreeDeciduous } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout';
 import { useAuthStore } from '@/stores/authStore';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -19,6 +20,16 @@ const HomePage: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Mock user profile data for the community avatars
+  const mockProfiles = [
+    { name: 'Marco R', src: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9' },
+    { name: 'Giulia T', src: '' },
+    { name: 'Andrea B', src: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04' },
+    { name: 'Sofia M', src: '' },
+    { name: 'Luca V', src: '' },
+    { name: 'Elena C', src: '' },
+  ];
 
   return (
     <Layout>
@@ -56,14 +67,34 @@ const HomePage: React.FC = () => {
                 </Button>
               </div>
               
-              {/* Community Counter */}
-              <div className="mt-8 bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-nutella-beige shadow-sm inline-flex items-center">
-                <Users className="h-6 w-6 text-nutella-brown mr-3" />
-                <div>
-                  <p className="text-sm font-medium text-nutella-brown">La nostra community</p>
-                  <p className="text-2xl font-bold text-nutella-red">
-                    {communityCount.toLocaleString('it-IT')} partecipanti
-                  </p>
+              {/* Community Counter with Avatars */}
+              <div className="mt-8 bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-nutella-beige shadow-sm">
+                <div className="flex items-center mb-2">
+                  <Users className="h-6 w-6 text-nutella-brown mr-3" />
+                  <div>
+                    <p className="text-sm font-medium text-nutella-brown">La nostra community</p>
+                    <p className="text-2xl font-bold text-nutella-red">
+                      {communityCount.toLocaleString('it-IT')} partecipanti
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Profile avatars */}
+                <div className="flex -space-x-2 overflow-hidden mt-2">
+                  {mockProfiles.map((profile, index) => (
+                    <Avatar key={index} className="border-2 border-white w-8 h-8">
+                      {profile.src ? (
+                        <AvatarImage src={profile.src} alt={profile.name} />
+                      ) : (
+                        <AvatarFallback className="bg-nutella-green text-white text-xs">
+                          {profile.name.split(' ').map(n => n[0]).join('')}
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                  ))}
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full border-2 border-white bg-nutella-beige text-nutella-brown text-xs font-medium">
+                    +{(communityCount - mockProfiles.length).toLocaleString()}
+                  </div>
                 </div>
               </div>
             </div>
@@ -100,11 +131,7 @@ const HomePage: React.FC = () => {
             
             <div className="bg-nutella-beige/50 rounded-lg p-6 text-center">
               <div className="bg-nutella-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <img 
-                  src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
-                  alt="Nutella Forest" 
-                  className="h-12 w-auto"
-                />
+                <TreeDeciduous className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3 text-nutella-brown">Adotta un Albero</h3>
               <p className="text-gray-700">
@@ -136,11 +163,7 @@ const HomePage: React.FC = () => {
             <div className="bg-white rounded-lg p-6 shadow-md">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-4">
-                  <img 
-                    src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
-                    alt="Nutella Forest" 
-                    className="h-12 w-auto"
-                  />
+                  <TreeDeciduous className="h-10 w-10 text-nutella-green" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-3 text-nutella-brown">Mappa Interattiva</h3>
@@ -183,11 +206,7 @@ const HomePage: React.FC = () => {
               {isAuthenticated ? 'Vai alla tua foresta' : 'Inizia ora'}
               <ArrowRight className="ml-2" />
             </Button>
-            <img 
-              src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
-              alt="Nutella Forest" 
-              className="h-16 w-auto"
-            />
+            <TreeDeciduous className="h-16 w-16 text-white" />
           </div>
         </div>
       </section>
