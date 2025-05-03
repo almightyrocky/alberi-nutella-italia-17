@@ -18,7 +18,7 @@ const NutellaLogo: React.FC<NutellaLogoProps> = ({
 
   return (
     <div className={`font-display font-bold ${sizeClasses[size]} ${className}`}>
-      <span className="text-black">N</span>
+      <span className="text-black">n</span>
       <span className="text-nutella-red">utella</span>
     </div>
   );

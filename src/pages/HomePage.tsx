@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Users, Award, BarChart, TreeDeciduous } from 'lucide-react';
@@ -45,7 +44,7 @@ const HomePage: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-10 md:mb-0">
               <h1 className="text-4xl md:text-5xl font-display font-bold text-nutella-brown mb-6">
-                Adotta un albero con <span className="text-nutella-red">Nutella</span>
+                Adotta un albero con <span className="inline-flex"><span className="text-black">n</span><span className="text-nutella-red">utella</span></span>
               </h1>
               <p className="text-lg mb-8 text-gray-700">
                 Entra a far parte della Nutella Forest: ogni barattolo di Nutella
@@ -100,17 +99,13 @@ const HomePage: React.FC = () => {
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <Card className="w-full max-w-xl overflow-hidden shadow-lg rounded-xl border-nutella-beige">
-                <div className="relative pb-[56.25%] h-0">
-                  <iframe 
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/7a7lO-cd3jA?si=W_SeT0TbUTWQxRCh" 
-                    title="Nutella Forest Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </Card>
+              <div className="relative animate-bounce-slow">
+                <img 
+                  src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
+                  alt="Nutella Forest - Un cucchiaio per te, un albero per tutti" 
+                  className="w-64 md:w-80 h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
