@@ -2,10 +2,11 @@
 import React from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { TreeDeciduous, MapPin, BarChart, Award, LogIn, User } from 'lucide-react';
+import { TreeDeciduous, MapPin, BarChart, Award, LogIn, User, Home, Info, Mail, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useState } from 'react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
     {
@@ -40,6 +42,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
   ];
 
+  const navItems = [
+    {
+      name: "Home",
+      path: "/",
+      icon: <Home className="h-4 w-4 mr-1" />
+    },
+    {
+      name: "Scopri di più",
+      path: "/about",
+      icon: <Info className="h-4 w-4 mr-1" />
+    },
+    {
+      name: "Contatti",
+      path: "/contact",
+      icon: <Mail className="h-4 w-4 mr-1" />
+    }
+  ];
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -50,6 +74,25 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span className="text-nutella-red">Nutella</span> Forest
             </span>
           </Link>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "flex items-center text-sm font-medium transition-colors hover:text-nutella-green",
+                  location.pathname === item.path
+                    ? "text-nutella-green"
+                    : "text-nutella-brown"
+                )}
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            ))}
+          </nav>
           
           <div className="flex items-center gap-3">
             {isAuthenticated ? (
@@ -76,8 +119,41 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <LogIn className="h-5 w-5 ml-2" />
               </Button>
             )}
+
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              className="md:hidden"
+              onClick={toggleMenu}
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 py-2 px-4 shadow-md">
+            <div className="space-y-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={cn(
+                    "flex items-center py-2 px-3 rounded-md text-sm font-medium transition-colors",
+                    location.pathname === item.path
+                      ? "bg-nutella-green/10 text-nutella-green"
+                      : "text-nutella-brown hover:bg-nutella-green/5 hover:text-nutella-green"
+                  )}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.icon}
+                  <span className="ml-2">{item.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Content */}
