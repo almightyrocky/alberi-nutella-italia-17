@@ -10,6 +10,30 @@ import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 
+// Fixed positions for community trees in Italy
+const communityTreePositions = [
+  { latitude: 41.9028, longitude: 12.4964 }, // Rome
+  { latitude: 45.4642, longitude: 9.1900 }, // Milan
+  { latitude: 40.8518, longitude: 14.2681 }, // Naples
+  { latitude: 43.7696, longitude: 11.2558 }, // Florence
+  { latitude: 45.4408, longitude: 12.3155 }, // Venice
+  { latitude: 44.4949, longitude: 11.3426 }, // Bologna
+  { latitude: 37.5079, longitude: 15.0830 }, // Catania
+  { latitude: 38.1157, longitude: 13.3615 }, // Palermo
+  { latitude: 40.3980, longitude: 17.6610 }, // Taranto
+  { latitude: 44.4056, longitude: 8.9463 }, // Genoa
+  { latitude: 45.0703, longitude: 7.6869 }, // Turin
+  { latitude: 41.4637, longitude: 12.9234 }, // Latina
+  { latitude: 43.0170, longitude: 12.3185 }, // Perugia
+  { latitude: 42.3498, longitude: 13.3995 }, // L'Aquila
+  { latitude: 45.6495, longitude: 13.7768 }, // Trieste
+  { latitude: 44.8378, longitude: 10.3270 }, // Parma
+  { latitude: 36.9477, longitude: 14.7338 }, // Ragusa
+  { latitude: 46.0693, longitude: 11.1216 }, // Trento
+  { latitude: 40.6401, longitude: 15.8056 }, // Potenza
+  { latitude: 39.2238, longitude: 9.1217 }   // Cagliari
+];
+
 const MapPage: React.FC = () => {
   const { user } = useAuthStore();
   const { trees, fetchUserTrees, loading } = useTreeStore();
@@ -36,23 +60,8 @@ const MapPage: React.FC = () => {
     setIsDialogOpen(true);
   };
 
-  // Genera una lista di alberi della community con posizioni sparse per l'Italia
-  const getRandomPosition = () => {
-    // Coordinate approssimative dell'Italia
-    const minLat = 36.5;
-    const maxLat = 47.0;
-    const minLng = 6.5;
-    const maxLng = 18.5;
-    
-    return {
-      latitude: minLat + Math.random() * (maxLat - minLat),
-      longitude: minLng + Math.random() * (maxLng - minLng)
-    };
-  };
-
-  // Simula alberi posizionati in varie regioni italiane
-  const communityTrees = Array.from({ length: 20 }, (_, index) => {
-    const position = getRandomPosition();
+  // Simulazione di alberi della community con posizioni fisse per l'Italia
+  const communityTrees = communityTreePositions.map((position, index) => {
     return {
       id: `community-${index}`,
       name: `Albero Comunitario ${index + 1}`,
@@ -124,7 +133,7 @@ const MapPage: React.FC = () => {
                       top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`,
                       animationDelay: `${Math.random() * 2}s`
                     }}
-                    onClick={() => showTreeDetails(tree)}
+                    onClick={() => navigate(`/tree/${tree.id}`)}
                   >
                     <div className="bg-nutella-green text-white p-2 rounded-full shadow-lg flex items-center justify-center h-12 w-12 hover:scale-110 transition-transform relative z-10">
                       <TreeDeciduous className="h-7 w-7" />

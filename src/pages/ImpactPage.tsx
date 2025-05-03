@@ -6,19 +6,6 @@ import { Loader2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Layout from '@/components/Layout';
 import { Tree } from '@/types';
-import { 
-  ResponsiveContainer, 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend,
-  PieChart,
-  Pie,
-  Cell
-} from 'recharts';
 
 const ImpactPage: React.FC = () => {
   const { user } = useAuthStore();
@@ -48,22 +35,6 @@ const ImpactPage: React.FC = () => {
   };
 
   const totals = calculateTotals();
-
-  // Prepare chart data
-  const barData = trees.map(tree => ({
-    name: tree.name,
-    co2: tree.metrics.co2Absorbed,
-    oxygen: tree.metrics.oxygenProduced
-  }));
-
-  const pieData = [
-    { name: 'CO₂ Assorbita (kg)', value: totals.co2Absorbed, color: '#4F7942' },
-    { name: 'Ossigeno Prodotto (kg)', value: totals.oxygenProduced, color: '#2E8B57' },
-    { name: 'Acqua Risparmiata (l)', value: totals.waterSaved / 10, color: '#3498db' }, // Scaled for visibility
-    { name: 'Habitat Creato (m²)', value: totals.habitatCreated, color: '#8B4513' }
-  ];
-
-  const COLORS = ['#4F7942', '#2E8B57', '#3498db', '#8B4513'];
 
   // Impact comparisons
   const getImpactComparisons = () => {
@@ -163,63 +134,17 @@ const ImpactPage: React.FC = () => {
               </Card>
             </div>
 
-            {/* Charts */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Contributo per Albero</CardTitle>
-                  <CardDescription>CO₂ assorbita e ossigeno prodotto per ogni albero</CardDescription>
-                </CardHeader>
-                <CardContent className="h-80">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart
-                      data={barData}
-                      margin={{ top: 20, right: 30, left: 20, bottom: 70 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis 
-                        dataKey="name" 
-                        angle={-45} 
-                        textAnchor="end"
-                        height={70}
-                      />
-                      <YAxis />
-                      <Tooltip formatter={(value) => [`${value} kg`, undefined]} />
-                      <Legend />
-                      <Bar dataKey="co2" name="CO₂ Assorbita" fill="#4F7942" />
-                      <Bar dataKey="oxygen" name="Ossigeno Prodotto" fill="#2E8B57" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle>Distribuzione dell'Impatto</CardTitle>
-                  <CardDescription>Proporzione delle diverse metriche ambientali</CardDescription>
-                </CardHeader>
-                <CardContent className="h-80">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={pieData}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        outerRadius={80}
-                        label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                        dataKey="value"
-                      >
-                        {pieData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip formatter={(value, name) => [value, name]} />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
+            <div className="bg-nutella-beige/30 p-6 rounded-lg">
+              <h3 className="text-xl font-semibold text-nutella-brown mb-3">Il tuo contributo per l'ambiente</h3>
+              <p className="text-gray-700 mb-4">
+                Grazie ai tuoi {trees.length} alberi adottati, stai contribuendo attivamente alla lotta contro il cambiamento climatico 
+                e alla conservazione degli ecosistemi naturali. Ogni albero che adotti assorbe CO₂, produce ossigeno, aiuta 
+                a risparmiare acqua e crea habitat per diverse specie.
+              </p>
+              <p className="text-gray-700">
+                Continua ad adottare alberi e monitora il tuo impatto crescere nel tempo. Insieme possiamo fare la differenza 
+                per il nostro pianeta, un albero alla volta!
+              </p>
             </div>
           </>
         )}

@@ -18,6 +18,7 @@ import ContactPage from "./pages/ContactPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import NotFound from "./pages/NotFound";
+import TreeDetailPage from "./pages/TreeDetailPage";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/map" element={<MapPage />} />
             <Route path="/impact" element={<ImpactPage />} />
             <Route path="/badges" element={<BadgesPage />} />
+            <Route path="/tree/:treeId" element={<TreeDetailPage />} />
           </Route>
           
           {/* Catch-all route */}
