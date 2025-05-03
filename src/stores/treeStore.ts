@@ -27,7 +27,8 @@ const validCodes = [
   "ECO2023",
   "VITA2023",
   "TERRA2023",
-  "BOSCO2023"
+  "BOSCO2023",
+  "NUTELLA2021" // Aggiunto il nuovo codice richiesto
 ];
 
 export const useTreeStore = create<TreeState>((set, get) => ({
