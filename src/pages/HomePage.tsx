@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Users, Award, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,12 +9,27 @@ import { useAuthStore } from '@/stores/authStore';
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthStore();
+  const [communityCount, setCommunityCount] = useState(12835);
+
+  // Simple animation effect for the counter
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCommunityCount(prevCount => prevCount + Math.floor(Math.random() * 3));
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-nutella-beige to-white py-16 md:py-24">
-        <div className="container mx-auto px-6">
+      {/* Hero Section with Dynamic Background */}
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        {/* Background with multiple layers for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-nutella-brown/10 to-white/70 z-0"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22 width=%2280%22 height=%2280%22 opacity=%22.05%22%3E%3Cpath d=%22M40 0c22.091 0 40 17.909 40 40S62.091 80 40 80 0 62.091 0 40 17.909 0 40 0z%22 fill=%22%232E7D32%22/%3E%3C/svg%3E')] z-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent z-0"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-10 md:mb-0">
               <h1 className="text-4xl md:text-5xl font-display font-bold text-nutella-brown mb-6">
@@ -40,9 +55,20 @@ const HomePage: React.FC = () => {
                   Scopri di più
                 </Button>
               </div>
+              
+              {/* Community Counter */}
+              <div className="mt-8 bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-nutella-beige shadow-sm inline-flex items-center">
+                <Users className="h-6 w-6 text-nutella-brown mr-3" />
+                <div>
+                  <p className="text-sm font-medium text-nutella-brown">La nostra community</p>
+                  <p className="text-2xl font-bold text-nutella-red">
+                    {communityCount.toLocaleString('it-IT')} partecipanti
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <div className="relative">
+              <div className="relative animate-bounce-slow">
                 <img 
                   src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
                   alt="Nutella Forest - Un cucchiaio per te, un albero per tutti" 
