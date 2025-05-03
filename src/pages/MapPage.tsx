@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import { useTreeStore } from '@/stores/treeStore';
@@ -62,9 +61,31 @@ const MapPage: React.FC = () => {
 
   // Simulazione di alberi della community con posizioni fisse per l'Italia
   const communityTrees = communityTreePositions.map((position, index) => {
+    const treeNames = [
+      'Quercia Rossa',
+      'Pino Marittimo',
+      'Ulivo Centenario',
+      'Castagno Gigante',
+      'Cipresso di San Francesco',
+      'Betulla Bianca',
+      'Acero Campestre',
+      'Faggio Antico',
+      'Tiglio Aromatico',
+      'Pioppo Nero',
+      'Frassino Maggiore',
+      'Cedro del Libano',
+      'Magnolia Grandiflora',
+      'Ippocastano',
+      'Platano Comune',
+      'Ginkgo Biloba',
+      'Sughera Mediterranea',
+      'Bagolaro',
+      'Carpino Bianco',
+      'Nocciolo Selvatico'
+    ];
     return {
       id: `community-${index}`,
-      name: `Albero Comunitario ${index + 1}`,
+      name: treeNames[index],
       species: ['Pino', 'Quercia', 'Ulivo', 'Betulla', 'Acero', 'Castagno', 'Cipresso'][Math.floor(Math.random() * 7)],
       location: {
         latitude: position.latitude,
@@ -116,18 +137,30 @@ const MapPage: React.FC = () => {
               <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center relative">
                 <div className="absolute inset-0 bg-black/20"></div>
                 
-                {/* Map Controls */}
-                <div className="absolute top-4 right-4 flex flex-col gap-2">
-                  <button className="bg-white p-2 rounded-md shadow-md">
-                    <MapPin className="h-5 w-5 text-nutella-green" />
-                  </button>
-                </div>
-                
-                {/* My Tree Markers */}
+                {/* Community Tree Markers */}
+                {communityTrees.map((tree) => (
+                  <div
+                    key={tree.id}
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 group"
+                    style={{
+                      left: `${(tree.location.longitude - 6.5) / (18.5 - 6.5) * 100}%`,
+                      top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`
+                    }}
+                  >
+                    <div className="bg-gray-400 text-white p-2 rounded-full shadow-lg flex items-center justify-center h-8 w-8 opacity-70 hover:opacity-100 transition-opacity">
+                      <TreeDeciduous className="h-5 w-5" />
+                    </div>
+                    <div className="mt-1 bg-white text-nutella-brown px-2 py-0.5 rounded text-xs font-medium shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity absolute left-1/2 transform -translate-x-1/2">
+                      {tree.name}
+                    </div>
+                  </div>
+                ))}
+
+                {/* My Tree Markers - Moved after community trees to ensure they're on top */}
                 {filteredTrees.map((tree) => (
                   <div
                     key={tree.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer animate-bounce-slow"
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer animate-bounce-slow z-10"
                     style={{
                       left: `${(tree.location.longitude - 6.5) / (18.5 - 6.5) * 100}%`,
                       top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`,
@@ -140,22 +173,6 @@ const MapPage: React.FC = () => {
                     </div>
                     <div className="mt-2 bg-white text-nutella-brown px-3 py-1 rounded text-xs font-medium shadow-md whitespace-nowrap">
                       {tree.name}
-                    </div>
-                  </div>
-                ))}
-
-                {/* Community Tree Markers */}
-                {communityTrees.map((tree) => (
-                  <div
-                    key={tree.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2"
-                    style={{
-                      left: `${(tree.location.longitude - 6.5) / (18.5 - 6.5) * 100}%`,
-                      top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`
-                    }}
-                  >
-                    <div className="bg-gray-400 text-white p-2 rounded-full shadow-lg flex items-center justify-center h-8 w-8 opacity-70">
-                      <TreeDeciduous className="h-5 w-5" />
                     </div>
                   </div>
                 ))}
