@@ -13,27 +13,21 @@ interface TreeState {
   validateCode: (code: string) => Promise<TreeCode>;
 }
 
-// Mock data for development
-const mockTrees: Tree[] = [
-  {
-    id: "tree-1",
-    name: "Il Guardiano",
-    species: "Quercia",
-    location: {
-      latitude: 41.9028,
-      longitude: 12.4964,
-      country: "Italia"
-    },
-    adoptedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-    code: "NUTELLA123",
-    userId: "1",
-    metrics: {
-      co2Absorbed: 25,
-      oxygenProduced: 15,
-      waterSaved: 450,
-      habitatCreated: 12
-    }
-  }
+// Mockup vuoto iniziale senza alberi predefiniti
+const mockTrees: Tree[] = [];
+
+// Lista di codici validi per l'adozione
+const validCodes = [
+  "NUTELLA2023", 
+  "ALBERO2023", 
+  "FORESTA2023", 
+  "NATURA2023", 
+  "VERDE2023",
+  "PIANTA2023",
+  "ECO2023",
+  "VITA2023",
+  "TERRA2023",
+  "BOSCO2023"
 ];
 
 export const useTreeStore = create<TreeState>((set, get) => ({
@@ -46,7 +40,7 @@ export const useTreeStore = create<TreeState>((set, get) => ({
     try {
       // In a real app, we would call an API here
       await new Promise((resolve) => setTimeout(resolve, 800));
-      set({ trees: mockTrees, loading: false });
+      set({ trees: get().trees.filter(tree => tree.userId === userId), loading: false });
     } catch (error) {
       set({ error: (error as Error).message, loading: false });
     }
@@ -58,8 +52,14 @@ export const useTreeStore = create<TreeState>((set, get) => ({
       // First validate the code
       const validationResult = await get().validateCode(code);
       
-      if (!validationResult.valid || validationResult.used) {
-        toast.error(validationResult.used ? "Questo codice è già stato utilizzato" : "Codice non valido");
+      if (!validationResult.valid) {
+        toast.error("Codice non valido");
+        set({ loading: false });
+        return false;
+      }
+
+      if (validationResult.used) {
+        toast.error("Questo codice è già stato utilizzato");
         set({ loading: false });
         return false;
       }
@@ -67,23 +67,30 @@ export const useTreeStore = create<TreeState>((set, get) => ({
       // In a real app, we would call an API here to register the adoption
       await new Promise((resolve) => setTimeout(resolve, 1000));
       
+      // Genera posizioni casuali in Italia
+      const latitudeItaly = 41.9 + (Math.random() * 2 - 1);
+      const longitudeItaly = 12.5 + (Math.random() * 2 - 1);
+
+      const speciesOptions = ["Pino Mediterraneo", "Quercia", "Ulivo", "Leccio", "Abete"];
+      const randomSpecies = validationResult.species || speciesOptions[Math.floor(Math.random() * speciesOptions.length)];
+      
       const newTree: Tree = {
         id: `tree-${Date.now()}`,
         name,
-        species: "Pino Mediterraneo",
+        species: randomSpecies,
         location: {
-          latitude: 43.7696,
-          longitude: 11.2558,
+          latitude: latitudeItaly,
+          longitude: longitudeItaly,
           country: "Italia"
         },
         adoptedAt: new Date().toISOString(),
         code,
         userId,
         metrics: {
-          co2Absorbed: 0,
-          oxygenProduced: 0,
-          waterSaved: 0,
-          habitatCreated: 0
+          co2Absorbed: Math.floor(Math.random() * 5),
+          oxygenProduced: Math.floor(Math.random() * 3),
+          waterSaved: Math.floor(Math.random() * 100),
+          habitatCreated: Math.floor(Math.random() * 5)
         }
       };
 
@@ -106,21 +113,20 @@ export const useTreeStore = create<TreeState>((set, get) => ({
       // In a real app, we would call an API here
       await new Promise((resolve) => setTimeout(resolve, 500));
       
-      // For demo purposes, only specific codes are valid
-      if (code === "NUTELLA2023" || code === "ALBERO2023") {
+      // Controlla se il codice è già stato utilizzato
+      const isUsed = get().trees.some(tree => tree.code.toLowerCase() === code.toLowerCase());
+      
+      // Controlla se il codice è nella lista dei codici validi
+      const isValid = validCodes.some(validCode => 
+        validCode.toLowerCase() === code.toLowerCase()
+      );
+      
+      if (isValid) {
         return {
           code,
           valid: true,
-          used: false,
-          species: "Pino Mediterraneo"
-        };
-      } else if (code === "NUTELLA123") {
-        return {
-          code,
-          valid: true,
-          used: true,
-          treeId: "tree-1",
-          species: "Quercia"
+          used: isUsed,
+          species: ["Pino Mediterraneo", "Quercia", "Ulivo"][Math.floor(Math.random() * 3)]
         };
       }
       

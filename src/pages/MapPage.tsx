@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import { useTreeStore } from '@/stores/treeStore';
-import { MapPin, Loader2, Plus, Search } from 'lucide-react';
+import { MapPin, Loader2, Plus, Search, TreeDeciduous } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { Tree } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -36,17 +36,34 @@ const MapPage: React.FC = () => {
     setIsDialogOpen(true);
   };
 
-  // Simulate random positions for community trees
-  const communityTrees = Array.from({ length: 15 }, (_, index) => ({
-    id: `community-${index}`,
-    name: `Albero Comunitario ${index + 1}`,
-    species: ['Pino', 'Quercia', 'Ulivo', 'Betulla', 'Acero'][Math.floor(Math.random() * 5)],
-    location: {
-      latitude: 41.9 + (Math.random() * 0.2 - 0.1),
-      longitude: 12.5 + (Math.random() * 0.2 - 0.1),
-      country: "Italia"
-    }
-  }));
+  // Genera una lista di alberi della community con posizioni sparse per l'Italia
+  const getRandomPosition = () => {
+    // Coordinate approssimative dell'Italia
+    const minLat = 36.5;
+    const maxLat = 47.0;
+    const minLng = 6.5;
+    const maxLng = 18.5;
+    
+    return {
+      latitude: minLat + Math.random() * (maxLat - minLat),
+      longitude: minLng + Math.random() * (maxLng - minLng)
+    };
+  };
+
+  // Simula alberi posizionati in varie regioni italiane
+  const communityTrees = Array.from({ length: 20 }, (_, index) => {
+    const position = getRandomPosition();
+    return {
+      id: `community-${index}`,
+      name: `Albero Comunitario ${index + 1}`,
+      species: ['Pino', 'Quercia', 'Ulivo', 'Betulla', 'Acero', 'Castagno', 'Cipresso'][Math.floor(Math.random() * 7)],
+      location: {
+        latitude: position.latitude,
+        longitude: position.longitude,
+        country: "Italia"
+      }
+    };
+  });
 
   return (
     <Layout>
@@ -101,17 +118,18 @@ const MapPage: React.FC = () => {
                 {filteredTrees.map((tree) => (
                   <div
                     key={tree.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer animate-bounce-slow"
                     style={{
-                      left: `${(tree.location.longitude + 180) / 360 * 100}%`,
-                      top: `${(90 - tree.location.latitude) / 180 * 100}%`
+                      left: `${(tree.location.longitude - 6.5) / (18.5 - 6.5) * 100}%`,
+                      top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`,
+                      animationDelay: `${Math.random() * 2}s`
                     }}
                     onClick={() => showTreeDetails(tree)}
                   >
-                    <div className="bg-nutella-green text-white p-2 rounded-full shadow-lg flex items-center justify-center h-10 w-10 hover:scale-110 transition-transform relative z-10">
-                      <MapPin className="h-6 w-6" />
+                    <div className="bg-nutella-green text-white p-2 rounded-full shadow-lg flex items-center justify-center h-12 w-12 hover:scale-110 transition-transform relative z-10">
+                      <TreeDeciduous className="h-7 w-7" />
                     </div>
-                    <div className="mt-2 bg-white text-nutella-brown px-2 py-1 rounded text-xs font-medium shadow-md whitespace-nowrap">
+                    <div className="mt-2 bg-white text-nutella-brown px-3 py-1 rounded text-xs font-medium shadow-md whitespace-nowrap">
                       {tree.name}
                     </div>
                   </div>
@@ -123,12 +141,12 @@ const MapPage: React.FC = () => {
                     key={tree.id}
                     className="absolute transform -translate-x-1/2 -translate-y-1/2"
                     style={{
-                      left: `${(tree.location.longitude + 180) / 360 * 100}%`,
-                      top: `${(90 - tree.location.latitude) / 180 * 100}%`
+                      left: `${(tree.location.longitude - 6.5) / (18.5 - 6.5) * 100}%`,
+                      top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`
                     }}
                   >
                     <div className="bg-gray-400 text-white p-2 rounded-full shadow-lg flex items-center justify-center h-8 w-8 opacity-70">
-                      <MapPin className="h-5 w-5" />
+                      <TreeDeciduous className="h-5 w-5" />
                     </div>
                   </div>
                 ))}
