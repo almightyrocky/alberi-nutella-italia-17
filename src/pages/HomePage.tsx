@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TreeDeciduous, Map, ArrowRight, Users, Award, BarChart } from 'lucide-react';
+import { ArrowRight, Users, Award, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout';
 import { useAuthStore } from '@/stores/authStore';
@@ -42,8 +42,12 @@ const HomePage: React.FC = () => {
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <div className="relative w-64 h-64 md:w-80 md:h-80 bg-nutella-green rounded-full flex items-center justify-center animate-tree-grow">
-                <TreeDeciduous className="w-36 h-36 md:w-48 md:h-48 text-white" />
+              <div className="relative">
+                <img 
+                  src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
+                  alt="Nutella Forest - Un cucchiaio per te, un albero per tutti" 
+                  className="w-64 md:w-80 h-auto"
+                />
               </div>
             </div>
           </div>
@@ -70,7 +74,11 @@ const HomePage: React.FC = () => {
             
             <div className="bg-nutella-beige/50 rounded-lg p-6 text-center">
               <div className="bg-nutella-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TreeDeciduous className="h-8 w-8 text-white" />
+                <img 
+                  src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
+                  alt="Nutella Forest" 
+                  className="h-12 w-auto"
+                />
               </div>
               <h3 className="text-xl font-bold mb-3 text-nutella-brown">Adotta un Albero</h3>
               <p className="text-gray-700">
@@ -101,7 +109,13 @@ const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white rounded-lg p-6 shadow-md">
               <div className="flex items-start">
-                <Map className="h-10 w-10 text-nutella-green mt-1 mr-4 flex-shrink-0" />
+                <div className="flex-shrink-0 mr-4">
+                  <img 
+                    src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
+                    alt="Nutella Forest" 
+                    className="h-12 w-auto"
+                  />
+                </div>
                 <div>
                   <h3 className="text-xl font-bold mb-3 text-nutella-brown">Mappa Interattiva</h3>
                   <p className="text-gray-700">
@@ -135,13 +149,20 @@ const HomePage: React.FC = () => {
           <p className="text-xl mb-8 max-w-3xl mx-auto">
             Ogni albero conta. Contribuisci a rendere il nostro pianeta più verde, un barattolo di Nutella alla volta.
           </p>
-          <Button
-            className="bg-nutella-red hover:bg-nutella-red/90 text-lg py-6 px-8"
-            onClick={() => navigate(isAuthenticated ? '/dashboard' : '/register')}
-          >
-            {isAuthenticated ? 'Vai alla tua foresta' : 'Inizia ora'}
-            <ArrowRight className="ml-2" />
-          </Button>
+          <div className="flex justify-center items-center gap-4">
+            <Button
+              className="bg-nutella-red hover:bg-nutella-red/90 text-lg py-6 px-8"
+              onClick={() => navigate(isAuthenticated ? '/dashboard' : '/register')}
+            >
+              {isAuthenticated ? 'Vai alla tua foresta' : 'Inizia ora'}
+              <ArrowRight className="ml-2" />
+            </Button>
+            <img 
+              src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
+              alt="Nutella Forest" 
+              className="h-16 w-auto"
+            />
+          </div>
         </div>
       </section>
     </Layout>
