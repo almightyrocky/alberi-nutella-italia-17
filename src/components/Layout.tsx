@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useState } from 'react';
+import NutellaLogo from './NutellaLogo';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -36,7 +37,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       icon: <BarChart className="h-5 w-5 mr-2" />
     },
     {
-      name: "Badges",
+      name: "Obiettivi",
       path: "/badges",
       icon: <Award className="h-5 w-5 mr-2" />
     }
@@ -70,9 +71,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <header className="sticky top-0 z-50 bg-white shadow-sm">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <span className="font-display text-lg md:text-xl font-bold text-nutella-brown">
-              <span className="text-nutella-red">Nutella</span> Forest
-            </span>
+            <NutellaLogo size="lg" />
+            <span className="font-display text-lg md:text-xl font-bold text-nutella-green ml-1">Forest</span>
           </Link>
           
           {/* Desktop Navigation */}
