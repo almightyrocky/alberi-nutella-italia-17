@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout';
 import { useAuthStore } from '@/stores/authStore';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card } from '@/components/ui/card';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -99,13 +100,17 @@ const HomePage: React.FC = () => {
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <div className="relative animate-bounce-slow">
-                <img 
-                  src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
-                  alt="Nutella Forest - Un cucchiaio per te, un albero per tutti" 
-                  className="w-64 md:w-80 h-auto"
-                />
-              </div>
+              <Card className="w-full max-w-xl overflow-hidden shadow-lg rounded-xl border-nutella-beige">
+                <div className="relative pb-[56.25%] h-0">
+                  <iframe 
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/7a7lO-cd3jA?si=W_SeT0TbUTWQxRCh" 
+                    title="Nutella Forest Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </Card>
             </div>
           </div>
         </div>
