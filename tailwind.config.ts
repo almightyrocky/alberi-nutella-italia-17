@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				nutella: {
+					brown: '#5C3D2E',
+					red: '#B85042',
+					beige: '#E7E8D1',
+					green: '#4F7942',
+					darkgreen: '#2E8B57'
 				}
 			},
 			borderRadius: {
@@ -84,11 +92,20 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'tree-grow': {
+					'0%': { transform: 'scale(0.8)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'tree-grow': 'tree-grow 1.5s ease-out'
+			},
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				display: ['Montserrat', 'sans-serif']
 			}
 		}
 	},
