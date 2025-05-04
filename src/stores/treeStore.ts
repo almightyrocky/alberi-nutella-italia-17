@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 import { Tree, TreeCode } from '@/types';
 import { toast } from 'sonner';
@@ -30,6 +29,12 @@ const validCodes = [
   "BOSCO2023",
   "NUTELLA2021" // Aggiunto il nuovo codice richiesto
 ];
+
+// Funzione per validare il formato del codice GLASS-XXXXX
+const isValidGlassCode = (code: string): boolean => {
+  const glassCodeRegex = /^GLASS-\d{5}$/;
+  return glassCodeRegex.test(code);
+};
 
 export const useTreeStore = create<TreeState>((set, get) => ({
   trees: [],
@@ -117,10 +122,8 @@ export const useTreeStore = create<TreeState>((set, get) => ({
       // Controlla se il codice è già stato utilizzato
       const isUsed = get().trees.some(tree => tree.code.toLowerCase() === code.toLowerCase());
       
-      // Controlla se il codice è nella lista dei codici validi
-      const isValid = validCodes.some(validCode => 
-        validCode.toLowerCase() === code.toLowerCase()
-      );
+      // Controlla se il codice è nel formato GLASS-XXXXX
+      const isValid = isValidGlassCode(code);
       
       if (isValid) {
         return {

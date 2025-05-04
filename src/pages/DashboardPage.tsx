@@ -78,28 +78,36 @@ const DashboardPage: React.FC = () => {
   return (
     <Layout>
       <div className="container mx-auto py-8 px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-display font-bold text-nutella-brown mb-2">
-            Benvenuto nella tua foresta, {user?.name}
-          </h1>
-          <p className="text-gray-600">
-            Qui puoi vedere tutti i tuoi alberi adottati e adottarne di nuovi.
-          </p>
+        {/* Hero Section */}
+        <div className="bg-nutella-beige/30 rounded-2xl p-8 mb-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl font-display font-bold text-nutella-brown mb-4">
+              Benvenuto nella tua foresta, {user?.name}
+            </h1>
+            <p className="text-lg text-gray-700">
+              Qui puoi vedere tutti i tuoi alberi adottati e adottarne di nuovi.
+              Ogni albero contribuisce a rendere il mondo più verde.
+            </p>
+          </div>
         </div>
 
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-nutella-brown">I Tuoi Alberi</h2>
+        {/* Action Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm">
+          <div className="flex items-center gap-2">
+            <TreeDeciduous className="h-6 w-6 text-nutella-green" />
+            <h2 className="text-2xl font-semibold text-nutella-brown">I Tuoi Alberi</h2>
+          </div>
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-nutella-green hover:bg-nutella-darkgreen">
+              <Button className="bg-nutella-green hover:bg-nutella-darkgreen px-6">
                 <PlusCircle className="h-5 w-5 mr-2" />
                 Adotta un albero
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle>Adotta un nuovo albero</DialogTitle>
-                <DialogDescription>
+                <DialogTitle className="text-2xl font-display text-nutella-brown">Adotta un nuovo albero</DialogTitle>
+                <DialogDescription className="text-gray-600">
                   Inserisci il codice che trovi nel barattolo Nutella e dai un nome al tuo albero.
                 </DialogDescription>
               </DialogHeader>
@@ -110,10 +118,10 @@ const DashboardPage: React.FC = () => {
                     name="code"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Codice Nutella</FormLabel>
+                        <FormLabel className="text-nutella-brown font-medium">Codice Nutella</FormLabel>
                         <FormControl>
                           <Input 
-                            placeholder="Es. NUTELLA2023" 
+                            placeholder="Es. GLASS-12345" 
                             {...field} 
                             className="forest-input"
                             disabled={isAdopting}
@@ -128,7 +136,7 @@ const DashboardPage: React.FC = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Nome del tuo albero</FormLabel>
+                        <FormLabel className="text-nutella-brown font-medium">Nome del tuo albero</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Es. Il Guardiano" 
@@ -164,12 +172,12 @@ const DashboardPage: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center py-16">
+          <div className="flex justify-center items-center py-16 bg-nutella-beige/20 rounded-xl">
             <Loader2 className="h-8 w-8 text-nutella-green animate-spin" />
             <span className="ml-2 text-lg text-nutella-brown">Caricamento alberi...</span>
           </div>
         ) : trees.length === 0 ? (
-          <div className="text-center py-16 bg-nutella-beige/20 rounded-lg">
+          <div className="text-center py-16 bg-nutella-beige/20 rounded-xl">
             <TreeDeciduous className="h-16 w-16 text-nutella-green mx-auto mb-4 opacity-70" />
             <h3 className="text-xl font-semibold text-nutella-brown mb-2">Nessun albero adottato</h3>
             <p className="text-gray-600 mb-6">
@@ -186,8 +194,8 @@ const DashboardPage: React.FC = () => {
         ) : (
           <>
             {/* Map Preview Section */}
-            <div className="mb-8 bg-nutella-beige/20 rounded-lg overflow-hidden">
-              <div className="w-full h-[300px] relative bg-gray-200">
+            <div className="mb-8 bg-white rounded-xl overflow-hidden shadow-sm">
+              <div className="w-full h-[400px] relative bg-gray-200">
                 <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center relative">
                   <div className="absolute inset-0 bg-black/20"></div>
                   
@@ -213,7 +221,7 @@ const DashboardPage: React.FC = () => {
                   ))}
                 </div>
               </div>
-              <div className="p-4 flex justify-between items-center">
+              <div className="p-6 flex justify-between items-center bg-nutella-beige/10">
                 <div className="text-sm text-nutella-brown">
                   <strong>Nota:</strong> Clicca su un albero per vedere i dettagli
                 </div>
@@ -260,29 +268,33 @@ const TreeCard: React.FC<TreeCardProps> = ({ tree, onClick }) => {
   };
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 border-nutella-beige">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 border-nutella-beige bg-white">
       <CardHeader className="p-0">
-        <div className="bg-gradient-to-br from-nutella-green to-nutella-darkgreen p-6 flex items-center justify-center">
-          <TreeDeciduous className="h-20 w-20 text-white" />
+        <div className="bg-gradient-to-br from-nutella-green to-nutella-darkgreen p-8 flex items-center justify-center">
+          <TreeDeciduous className="h-24 w-24 text-white" />
         </div>
       </CardHeader>
       <CardContent className="p-6">
-        <h3 className="text-xl font-bold text-nutella-brown mb-1">{tree.name}</h3>
-        <p className="text-sm text-gray-600 mb-4">
+        <h3 className="text-2xl font-bold text-nutella-brown mb-2">{tree.name}</h3>
+        <p className="text-sm text-gray-600 mb-6">
           {tree.species} - Adottato il {formatDate(tree.adoptedAt)}
         </p>
-        <div className="space-y-2">
-          <div className="flex justify-between">
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
             <span className="text-gray-600">CO₂ assorbita:</span>
-            <span className="font-medium">{tree.metrics.co2Absorbed} kg</span>
+            <span className="font-medium text-nutella-brown">{tree.metrics.co2Absorbed} kg</span>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <span className="text-gray-600">Ossigeno prodotto:</span>
-            <span className="font-medium">{tree.metrics.oxygenProduced} kg</span>
+            <span className="font-medium text-nutella-brown">{tree.metrics.oxygenProduced} kg</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-600">Acqua risparmiata:</span>
+            <span className="font-medium text-nutella-brown">{tree.metrics.waterSaved} L</span>
           </div>
         </div>
       </CardContent>
-      <CardFooter className="bg-gray-50 px-6 py-4">
+      <CardFooter className="bg-nutella-beige/10 px-6 py-4">
         <Button 
           variant="outline" 
           className="w-full border-nutella-green text-nutella-green hover:bg-nutella-green hover:text-white"
