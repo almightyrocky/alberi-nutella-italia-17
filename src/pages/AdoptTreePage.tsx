@@ -12,6 +12,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import QrScanner from '@/components/QrScanner';
 import { toast } from 'sonner';
+import { Separator } from '@/components/ui/separator';
+import { Camera } from 'lucide-react';
 
 const formSchema = z.object({
   treeCode: z.string().min(6, {
@@ -74,6 +76,23 @@ const AdoptTreePage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <Button
+            variant="outline"
+            type="button"
+            className="w-full mb-6 p-6 bg-primary/10 hover:bg-primary/20 flex items-center justify-center gap-3 text-lg"
+            onClick={() => {
+              const qrButton = document.querySelector('[data-qr-button]');
+              if (qrButton) {
+                (qrButton as HTMLButtonElement).click();
+              }
+            }}
+          >
+            <Camera size={24} />
+            <span>Scansiona QR Code Nutella</span>
+          </Button>
+          
+          <Separator className="mb-6" />
+          
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -86,7 +105,9 @@ const AdoptTreePage = () => {
                       <FormControl>
                         <Input placeholder="Inserisci il codice Nutella" {...field} />
                       </FormControl>
-                      <QrScanner onCodeScanned={handleQrCodeScanned} />
+                      <div className="hidden">
+                        <QrScanner onCodeScanned={handleQrCodeScanned} data-qr-button />
+                      </div>
                     </div>
                     <FormMessage />
                   </FormItem>

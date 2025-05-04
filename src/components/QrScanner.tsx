@@ -7,9 +7,11 @@ import { toast } from "sonner";
 
 interface QrScannerProps {
   onCodeScanned: (code: string) => void;
+  className?: string;
+  "data-qr-button"?: boolean;
 }
 
-const QrScanner: React.FC<QrScannerProps> = ({ onCodeScanned }) => {
+const QrScanner: React.FC<QrScannerProps> = ({ onCodeScanned, className, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -117,12 +119,12 @@ const QrScanner: React.FC<QrScannerProps> = ({ onCodeScanned }) => {
     <>
       <Button 
         variant="outline" 
-        className="gap-2" 
+        className={className}
         onClick={handleOpenCamera}
         type="button"
+        {...props}
       >
         <Camera size={18} />
-        <span>Scansiona QR Code</span>
       </Button>
 
       <Dialog open={isOpen} onOpenChange={(open) => {
