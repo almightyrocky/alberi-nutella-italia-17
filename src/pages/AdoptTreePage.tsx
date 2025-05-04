@@ -26,9 +26,9 @@ type FormValues = z.infer<typeof formSchema>;
 
 const AdoptTreePage = () => {
   const navigate = useNavigate();
-  const addTree = useTreeStore((state) => state.addTree);
-  const unlockBadge = useBadgeStore((state) => state.unlockBadge);
-  const trees = useTreeStore((state) => state.trees);
+  const { adoptTree, trees } = useTreeStore();
+  const { checkBadgeUnlocks } = useBadgeStore();
+  const user = { id: 'current-user-id' }; // Simuliamo l'utente corrente
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -43,7 +43,7 @@ const AdoptTreePage = () => {
     toast.success('Codice inserito automaticamente!');
   };
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = async (values: FormValues) => {
     // Verifica se il codice è già stato utilizzato
     const isCodeAlreadyUsed = trees.some(tree => tree.code === values.treeCode);
     
@@ -52,31 +52,16 @@ const AdoptTreePage = () => {
       return;
     }
 
-    // Genera un ID casuale per il nuovo albero
-    const newTreeId = Math.random().toString(36).substring(2, 11);
+    // Usa la funzione adoptTree dallo store
+    const success = await adoptTree(values.treeCode, values.treeName, user.id);
     
-    // Aggiungi il nuovo albero
-    addTree({
-      id: newTreeId,
-      name: values.treeName,
-      code: values.treeCode,
-      dateAdopted: new Date().toISOString(),
-      species: "Quercia",
-      location: "Parco Nazionale del Gran Paradiso, Italia",
-      co2Absorbed: 0,
-      age: 1,
-      height: 1.5,
-      health: "ottima",
-      lastUpdated: new Date().toISOString()
-    });
-
-    // Se è il primo albero, sblocca il badge "First Tree"
-    if (trees.length === 0) {
-      unlockBadge("first-tree");
+    if (success) {
+      // Dopo l'adozione, verifica se ci sono badge da sbloccare
+      checkBadgeUnlocks(trees);
+      
+      toast.success('Albero adottato con successo!');
+      navigate('/dashboard');
     }
-
-    toast.success('Albero adottato con successo!');
-    navigate('/dashboard');
   };
 
   return (
