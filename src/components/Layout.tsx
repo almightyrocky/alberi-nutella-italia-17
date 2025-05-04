@@ -69,7 +69,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg border-b border-nutella-beige/60">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <NutellaLogo size="xl" />
           </Link>
           
@@ -79,6 +79,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className={cn(
                   "flex items-center text-base font-semibold transition-colors px-3 py-1 rounded-lg hover:bg-nutella-green/10 hover:text-nutella-green",
                   location.pathname === item.path
@@ -90,13 +91,26 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 {item.name}
               </Link>
             ))}
-            <Button 
-              variant="default" 
-              onClick={() => navigate(isAuthenticated ? '/dashboard' : '/login')}
-              className="bg-nutella-red hover:bg-nutella-green text-white font-bold px-6 py-2 rounded-full shadow-md border-2 border-nutella-red transition-all duration-200"
-            >
-              {isAuthenticated ? 'La tua foresta' : 'Accedi'}
-            </Button>
+            {/* Show Accedi button in nav only if not authenticated and on desktop */}
+            {!isAuthenticated && (
+              <Button 
+                variant="default" 
+                onClick={() => navigate('/login')}
+                className="bg-nutella-red hover:bg-nutella-green text-white font-bold px-6 py-2 rounded-full shadow-md border-2 border-nutella-red transition-all duration-200"
+              >
+                Accedi
+              </Button>
+            )}
+            {/* If authenticated, show 'La tua foresta' button */}
+            {isAuthenticated && (
+              <Button 
+                variant="default" 
+                onClick={() => navigate('/dashboard')}
+                className="bg-nutella-red hover:bg-nutella-green text-white font-bold px-6 py-2 rounded-full shadow-md border-2 border-nutella-red transition-all duration-200"
+              >
+                La tua foresta
+              </Button>
+            )}
           </nav>
           
           <div className="flex items-center gap-3">
@@ -115,14 +129,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </Button>
               </>
             ) : (
-              <Button 
-                variant="default" 
-                onClick={() => navigate('/login')}
-                className="bg-nutella-green hover:bg-nutella-darkgreen"
-              >
-                {!isMobile && "Accedi"}
-                <LogIn className="h-5 w-5 ml-2" />
-              </Button>
+              // Only show Accedi button here on mobile
+              !isMobile && null
+              ||
+              (isMobile && (
+                <Button 
+                  variant="default" 
+                  onClick={() => navigate('/login')}
+                  className="bg-nutella-red hover:bg-nutella-green border-2 border-nutella-red text-white"
+                >
+                  Accedi
+                  <LogIn className="h-5 w-5 ml-2" />
+                </Button>
+              ))
             )}
 
             {/* Mobile menu button */}
@@ -144,13 +163,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link
                   key={item.path}
                   to={item.path}
+                  onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className={cn(
                     "flex items-center py-2 px-3 rounded-md text-sm font-medium transition-colors",
                     location.pathname === item.path
                       ? "bg-nutella-green/10 text-nutella-green"
                       : "text-nutella-brown hover:bg-nutella-green/5 hover:text-nutella-green"
                   )}
-                  onClick={() => setMenuOpen(false)}
                 >
                   {item.icon}
                   <span className="ml-2">{item.name}</span>
@@ -175,6 +194,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link
                   key={item.path}
                   to={item.path}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className={cn(
                     "flex flex-col items-center justify-center py-2 px-3 rounded-md text-sm font-medium transition-colors",
                     location.pathname === item.path
@@ -202,8 +222,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex flex-col items-center md:items-end gap-2">
             <p className="text-sm">&copy; 2025 Nutella Forest Italia. Tutti i diritti riservati.</p>
             <div className="flex space-x-4 mt-1">
-              <Link to="/privacy" className="text-sm hover:underline text-nutella-beige">Privacy</Link>
-              <Link to="/terms" className="text-sm hover:underline text-nutella-beige">Termini</Link>
+              <Link to="/privacy" className="text-sm hover:underline text-nutella-beige" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Privacy</Link>
+              <Link to="/terms" className="text-sm hover:underline text-nutella-beige" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Termini</Link>
               <a href="https://www.instagram.com/nutellaitalia/" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline text-nutella-gold font-bold">Instagram</a>
               <a href="https://www.facebook.com/Nutella.Italia/" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline text-nutella-gold font-bold">Facebook</a>
             </div>

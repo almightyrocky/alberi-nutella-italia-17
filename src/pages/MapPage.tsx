@@ -97,31 +97,35 @@ const MapPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto py-8 px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-display font-bold text-nutella-brown mb-2">
-            Mappa della Foresta
-          </h1>
-          <p className="text-gray-600">
-            Visualizza la posizione dei tuoi alberi e scopri gli altri alberi piantati nella foresta Nutella.
-          </p>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-nutella-beige/70 via-white/80 to-nutella-gold/20 py-20 md:py-32 rounded-b-3xl shadow-2xl animate-fade-in mb-12">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-display font-extrabold text-nutella-brown mb-8 drop-shadow-xl">
+              Mappa della Foresta
+            </h1>
+            <p className="text-2xl text-nutella-brown/80 font-medium max-w-2xl mx-auto mb-4">
+              Visualizza la posizione dei tuoi alberi e scopri gli altri alberi piantati nella Nutella Forest.
+            </p>
+          </div>
         </div>
-
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <div className="relative w-full md:w-64 mb-4 md:mb-0">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+      </section>
+      <div className="container mx-auto pb-16 px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+          <div className="relative w-full md:w-80 mb-4 md:mb-0">
+            <Search className="absolute left-3 top-3 h-5 w-5 text-nutella-brown/60" />
             <Input 
               placeholder="Cerca alberi..." 
-              className="pl-10"
+              className="pl-12 py-4 rounded-full border-2 border-nutella-beige shadow-md text-lg bg-white/90 focus:border-nutella-green focus:ring-1 focus:ring-nutella-green transition-all duration-300"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <Button 
-            className="bg-nutella-green hover:bg-nutella-darkgreen w-full md:w-auto"
+            className="bg-nutella-green hover:bg-nutella-darkgreen text-lg rounded-full font-bold shadow-md px-8 py-4 border-2 border-nutella-green transition-all duration-200 w-full md:w-auto hover:scale-105"
             onClick={() => navigate('/dashboard')}
           >
-            <Plus className="h-4 w-4 mr-2" /> Pianta un nuovo albero
+            <Plus className="h-5 w-5 mr-2" /> Pianta un nuovo albero
           </Button>
         </div>
 
@@ -131,12 +135,11 @@ const MapPage: React.FC = () => {
             <span className="ml-2 text-lg text-nutella-brown">Caricamento mappa...</span>
           </div>
         ) : (
-          <div className="bg-nutella-beige/20 rounded-lg overflow-hidden">
+          <div className="bg-white/90 rounded-3xl overflow-hidden shadow-2xl animate-fade-in border-2 border-nutella-beige">
             <div className="w-full h-[70vh] relative bg-gray-200 flex flex-col items-center justify-center">
               {/* Placeholder Map */}
-              <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center relative">
-                <div className="absolute inset-0 bg-black/20"></div>
-                
+              <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center relative rounded-t-3xl">
+                <div className="absolute inset-0 bg-black/20 rounded-t-3xl"></div>
                 {/* Community Tree Markers */}
                 {communityTrees.map((tree) => (
                   <div
@@ -147,16 +150,15 @@ const MapPage: React.FC = () => {
                       top: `${(47.0 - tree.location.latitude) / (47.0 - 36.5) * 100}%`
                     }}
                   >
-                    <div className="bg-gray-400 text-white p-2 rounded-full shadow-lg flex items-center justify-center h-8 w-8 opacity-70 hover:opacity-100 transition-opacity">
-                      <TreeDeciduous className="h-5 w-5" />
+                    <div className="bg-nutella-beige/80 text-nutella-brown p-2 rounded-full shadow-lg flex items-center justify-center h-10 w-10 opacity-70 hover:opacity-100 transition-all duration-300 border-2 border-nutella-gold hover:scale-110">
+                      <TreeDeciduous className="h-6 w-6" />
                     </div>
-                    <div className="mt-1 bg-white text-nutella-brown px-2 py-0.5 rounded text-xs font-medium shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity absolute left-1/2 transform -translate-x-1/2">
+                    <div className="mt-1 bg-white/90 text-nutella-brown px-3 py-1 rounded-full text-xs font-medium shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 absolute left-1/2 transform -translate-x-1/2 border border-nutella-beige">
                       {tree.name}
                     </div>
                   </div>
                 ))}
-
-                {/* My Tree Markers - Moved after community trees to ensure they're on top */}
+                {/* My Tree Markers */}
                 {filteredTrees.map((tree) => (
                   <div
                     key={tree.id}
@@ -168,35 +170,33 @@ const MapPage: React.FC = () => {
                     }}
                     onClick={() => navigate(`/tree/${tree.id}`)}
                   >
-                    <div className="bg-nutella-green text-white p-2 rounded-full shadow-lg flex items-center justify-center h-12 w-12 hover:scale-110 transition-transform relative z-10">
-                      <TreeDeciduous className="h-7 w-7" />
+                    <div className="bg-nutella-green text-white p-2 rounded-full shadow-xl flex items-center justify-center h-14 w-14 hover:scale-110 transition-all duration-300 relative z-10 border-4 border-nutella-gold">
+                      <TreeDeciduous className="h-8 w-8" />
                     </div>
-                    <div className="mt-2 bg-white text-nutella-brown px-3 py-1 rounded text-xs font-medium shadow-md whitespace-nowrap">
+                    <div className="mt-2 bg-white/90 text-nutella-brown px-4 py-2 rounded-full text-base font-bold shadow-md whitespace-nowrap border-2 border-nutella-beige animate-fade-in">
                       {tree.name}
                     </div>
                   </div>
                 ))}
-                
                 {/* Map Attribution */}
-                <div className="absolute bottom-2 right-2 text-xs text-white bg-black/50 px-2 py-1 rounded">
+                <div className="absolute bottom-2 right-2 text-xs text-white bg-black/50 px-3 py-2 rounded-full shadow-md">
                   © Nutella Forest Italia
                 </div>
               </div>
-              
               {/* Map Legend */}
-              <div className="absolute bottom-4 left-4 bg-white p-3 rounded-md shadow-md">
-                <h3 className="font-medium text-sm mb-2">Legenda</h3>
-                <div className="flex items-center text-xs mb-1">
-                  <div className="bg-nutella-green h-3 w-3 rounded-full mr-2"></div>
-                  <span>I tuoi alberi ({filteredTrees.length})</span>
+              <div className="absolute bottom-6 left-6 bg-white/90 p-5 rounded-2xl shadow-xl border-2 border-nutella-beige animate-fade-in">
+                <h3 className="font-bold text-nutella-brown text-base mb-3">Legenda</h3>
+                <div className="flex items-center text-base mb-2">
+                  <div className="bg-nutella-green h-4 w-4 rounded-full mr-3 border-2 border-nutella-gold"></div>
+                  <span className="font-medium">I tuoi alberi ({filteredTrees.length})</span>
                 </div>
-                <div className="flex items-center text-xs">
-                  <div className="bg-gray-400 h-3 w-3 rounded-full mr-2"></div>
-                  <span>Altri alberi ({communityTrees.length})</span>
+                <div className="flex items-center text-base">
+                  <div className="bg-nutella-beige/80 h-4 w-4 rounded-full mr-3 border-2 border-nutella-gold"></div>
+                  <span className="font-medium">Altri alberi ({communityTrees.length})</span>
                 </div>
               </div>
             </div>
-            <div className="p-4 text-center text-nutella-brown text-sm">
+            <div className="p-6 text-center text-nutella-brown text-lg font-medium bg-white/80 rounded-b-3xl border-t-2 border-nutella-beige animate-fade-in">
               <strong>Nota:</strong> Questa è una mappa dimostrativa. In una versione definitiva, qui vedresti una mappa interattiva con MapLibre GL JS.
             </div>
           </div>

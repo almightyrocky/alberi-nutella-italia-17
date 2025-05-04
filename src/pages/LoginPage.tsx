@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -37,31 +36,31 @@ const LoginPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-nutella-beige/20">
+      <div className="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-nutella-beige/60 via-white/80 to-nutella-gold/20 min-h-screen animate-fade-in">
         <div className="w-full max-w-md">
-          <Card className="border-nutella-green/20 shadow-lg">
+          <Card className="bg-white/90 border-2 border-nutella-beige rounded-3xl shadow-2xl animate-fade-in">
             <CardHeader className="space-y-1">
-              <CardTitle className="text-2xl font-bold text-center text-nutella-brown">
+              <CardTitle className="text-4xl font-extrabold text-center text-nutella-brown mb-2 drop-shadow">
                 Accedi
               </CardTitle>
-              <CardDescription className="text-center">
+              <CardDescription className="text-lg text-center text-nutella-brown/80 font-medium">
                 Inserisci le tue credenziali per accedere al tuo account
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                   <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-lg text-nutella-brown font-semibold">Email</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="email@esempio.it" 
                             {...field} 
-                            className="forest-input"
+                            className="forest-input text-lg py-4 px-4 rounded-full border-2 border-nutella-beige shadow-md"
                             disabled={loading}
                           />
                         </FormControl>
@@ -74,13 +73,13 @@ const LoginPage: React.FC = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel className="text-lg text-nutella-brown font-semibold">Password</FormLabel>
                         <FormControl>
                           <Input 
                             type="password" 
                             placeholder="******" 
                             {...field} 
-                            className="forest-input"
+                            className="forest-input text-lg py-4 px-4 rounded-full border-2 border-nutella-beige shadow-md"
                             disabled={loading}
                           />
                         </FormControl>
@@ -91,14 +90,15 @@ const LoginPage: React.FC = () => {
                   <div className="text-right">
                     <Link 
                       to="/reset-password" 
-                      className="text-sm text-nutella-green hover:underline"
+                      className="text-base text-nutella-green hover:underline font-semibold"
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     >
                       Password dimenticata?
                     </Link>
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-nutella-green hover:bg-nutella-darkgreen text-white"
+                    className="w-full bg-nutella-green hover:bg-nutella-darkgreen text-lg font-bold rounded-full py-4 shadow-md border-2 border-nutella-green transition-all duration-200"
                     disabled={loading}
                   >
                     {loading ? 'Accesso in corso...' : 'Accedi'}
@@ -107,9 +107,9 @@ const LoginPage: React.FC = () => {
               </Form>
             </CardContent>
             <CardFooter className="flex justify-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-base text-gray-600">
                 Non hai un account?{' '}
-                <Link to="/register" className="text-nutella-green hover:underline">
+                <Link to="/register" className="text-nutella-green hover:underline font-semibold" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                   Registrati
                 </Link>
               </p>

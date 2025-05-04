@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -35,47 +34,47 @@ const ResetPasswordPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-nutella-beige/20">
+      <div className="flex-1 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-nutella-beige/60 via-white/80 to-nutella-gold/20 min-h-screen animate-fade-in">
         <div className="w-full max-w-md">
-          <Card className="border-nutella-green/20 shadow-lg">
+          <Card className="bg-white/90 border-2 border-nutella-beige rounded-3xl shadow-2xl animate-fade-in">
             <CardHeader className="space-y-1">
-              <CardTitle className="text-2xl font-bold text-center text-nutella-brown">
+              <CardTitle className="text-4xl font-extrabold text-center text-nutella-brown mb-2 drop-shadow">
                 Reimposta Password
               </CardTitle>
-              <CardDescription className="text-center">
+              <CardDescription className="text-lg text-center text-nutella-brown/80 font-medium">
                 Inserisci la tua email per ricevere un link di reset
               </CardDescription>
             </CardHeader>
             <CardContent>
               {submitted ? (
                 <div className="text-center py-6">
-                  <p className="text-green-600 font-medium mb-4">
+                  <p className="text-green-600 font-medium mb-4 text-lg">
                     Email inviata con successo!
                   </p>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-6 text-base">
                     Controlla la tua casella email per le istruzioni su come reimpostare la password.
                   </p>
                   <Button
                     asChild
-                    className="bg-nutella-green hover:bg-nutella-darkgreen text-white"
+                    className="bg-nutella-green hover:bg-nutella-darkgreen text-lg font-bold rounded-full py-4 px-8 shadow-md border-2 border-nutella-green transition-all duration-200"
                   >
-                    <Link to="/login">Torna al login</Link>
+                    <Link to="/login" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Torna al login</Link>
                   </Button>
                 </div>
               ) : (
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel className="text-lg text-nutella-brown font-semibold">Email</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="email@esempio.it" 
                               {...field} 
-                              className="forest-input"
+                              className="forest-input text-lg py-4 px-4 rounded-full border-2 border-nutella-beige shadow-md"
                               disabled={loading}
                             />
                           </FormControl>
@@ -85,7 +84,7 @@ const ResetPasswordPage: React.FC = () => {
                     />
                     <Button
                       type="submit"
-                      className="w-full bg-nutella-green hover:bg-nutella-darkgreen text-white"
+                      className="w-full bg-nutella-green hover:bg-nutella-darkgreen text-lg font-bold rounded-full py-4 shadow-md border-2 border-nutella-green transition-all duration-200"
                       disabled={loading}
                     >
                       {loading ? 'Invio in corso...' : 'Invia email di reset'}
@@ -95,9 +94,9 @@ const ResetPasswordPage: React.FC = () => {
               )}
             </CardContent>
             <CardFooter className="flex justify-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-base text-gray-600">
                 Ricordi la password?{' '}
-                <Link to="/login" className="text-nutella-green hover:underline">
+                <Link to="/login" className="text-nutella-green hover:underline font-semibold" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                   Accedi
                 </Link>
               </p>
