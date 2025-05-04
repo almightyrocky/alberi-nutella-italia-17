@@ -136,7 +136,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-br from-nutella-brown via-nutella-gold/80 to-nutella-green/80 text-white rounded-t-3xl shadow-2xl animate-fade-in">
+      <section className="py-20 bg-gradient-to-br from-nutella-white via-nutella-gold/80 to-nutella-green/80 text-white rounded-t-3xl shadow-2xl animate-fade-in">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-display font-extrabold mb-8 drop-shadow-lg">
             Unisciti a Noi in Questa Missione Verde
