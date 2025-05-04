@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -57,10 +56,12 @@ const config = {
         nutella: {
           brown: "#5D4037",
           darkbrown: "#3E2723",
-          red: "#D32F2F",
-          beige: "#EFEBE9", 
-          green: "#2E7D32",
-          darkgreen: "#1B5E20"
+          red: "#e2211c",
+          beige: "#f7f3ef",
+          green: "#2e7d32",
+          darkgreen: "#1B5E20",
+          gold: "#e5a100",
+          white: "#fff8f0"
         }
       },
       borderRadius: {
@@ -69,8 +70,8 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        display: ["var(--font-display)", ...fontFamily.sans],
+        sans: ["Nunito", "var(--font-sans)", ...fontFamily.sans],
+        display: ["Nunito", "var(--font-display)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

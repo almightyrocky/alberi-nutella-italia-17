@@ -71,84 +71,84 @@ const ImpactPage: React.FC = () => {
           <div className="text-center py-16 bg-nutella-beige/20 rounded-xl">
             <TreeDeciduous className="h-16 w-16 text-nutella-green mx-auto mb-4 opacity-70" />
             <h3 className="text-xl font-semibold text-nutella-brown mb-2">Nessun dato disponibile</h3>
-            <p className="text-gray-600">
-              Adotta il tuo primo albero per iniziare a vedere il tuo impatto ambientale.
+            <p className="text-gray-600 text-center">
+              Pianta il tuo primo albero per iniziare a vedere il tuo impatto ambientale.
             </p>
           </div>
         ) : (
           <>
             {/* Main Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10 justify-items-center">
               <MetricCard 
                 title="CO₂ Assorbita" 
                 value={`${totals.co2Absorbed} kg`} 
                 description="Anidride carbonica rimossa dall'atmosfera"
-                icon={<Cloud className="h-6 w-6" />}
+                icon={<Cloud className="h-10 w-10" />}
                 color="from-nutella-green to-nutella-darkgreen"
               />
               <MetricCard 
                 title="Ossigeno Prodotto" 
                 value={`${totals.oxygenProduced} kg`} 
                 description="Ossigeno rilasciato nell'atmosfera"
-                icon={<Leaf className="h-6 w-6" />}
+                icon={<Leaf className="h-10 w-10" />}
                 color="from-green-500 to-green-700"
               />
               <MetricCard 
                 title="Acqua Risparmiata" 
                 value={`${totals.waterSaved} l`} 
                 description="Litri di acqua risparmiati grazie agli alberi"
-                icon={<Droplets className="h-6 w-6" />}
+                icon={<Droplets className="h-10 w-10" />}
                 color="from-blue-500 to-blue-700"
               />
               <MetricCard 
                 title="Habitat Creato" 
                 value={`${totals.habitatCreated} m²`} 
                 description="Area di habitat naturale creata"
-                icon={<Globe className="h-6 w-6" />}
+                icon={<Globe className="h-10 w-10" />}
                 color="from-nutella-brown to-nutella-darkbrown"
               />
             </div>
 
             {/* Impact Comparisons */}
-            <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
-              <h2 className="text-2xl font-display font-bold text-nutella-brown mb-6">
+            <div className="bg-white rounded-2xl shadow-lg p-8 mb-10 border border-nutella-beige">
+              <h2 className="text-3xl font-display font-bold text-nutella-brown mb-6 text-center">
                 Il tuo impatto in numeri
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <ComparisonCard 
                   title="Equivalente a"
                   value={`${comparisons.kmDriving} km`}
                   description="di guida in auto non effettuati"
-                  icon={<TreeDeciduous className="h-8 w-8 text-nutella-green" />}
+                  icon={<TreeDeciduous className="h-10 w-10 text-nutella-green" />}
                 />
                 <ComparisonCard 
                   title="Ossigeno per"
                   value={`${comparisons.daysBreathing} giorni`}
                   description="di respirazione per una persona"
-                  icon={<Leaf className="h-8 w-8 text-nutella-green" />}
+                  icon={<Leaf className="h-10 w-10 text-nutella-green" />}
                 />
                 <ComparisonCard 
                   title="Pari a"
                   value={`${comparisons.bottlesWater} bottiglie`}
                   description="d'acqua da 1,5 litri risparmiate"
-                  icon={<Droplets className="h-8 w-8 text-nutella-green" />}
+                  icon={<Droplets className="h-10 w-10 text-nutella-green" />}
                 />
               </div>
             </div>
 
             {/* Impact Summary */}
-            <div className="bg-nutella-beige/30 rounded-xl p-8">
+            <div className="bg-nutella-beige/50 rounded-2xl p-10 shadow-md">
               <div className="max-w-3xl mx-auto">
-                <h3 className="text-2xl font-display font-bold text-nutella-brown mb-4">
+                <h3 className="text-3xl font-display font-bold text-nutella-brown mb-4 text-center">
                   Il tuo contributo per l'ambiente
                 </h3>
-                <p className="text-gray-700 mb-4 leading-relaxed">
-                  Grazie ai tuoi {trees.length} alberi adottati, stai contribuendo attivamente alla lotta contro il cambiamento climatico 
-                  e alla conservazione degli ecosistemi naturali. Ogni albero che adotti assorbe CO₂, produce ossigeno, aiuta 
+                <p className="text-gray-700 mb-4 leading-relaxed text-lg text-center">
+                  Grazie ai tuoi {trees.length} alberi piantati, stai contribuendo attivamente alla lotta contro il cambiamento climatico 
+                  e alla conservazione degli ecosistemi naturali. Ogni albero che pianti assorbe CO₂, produce ossigeno, aiuta 
                   a risparmiare acqua e crea habitat per diverse specie.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Continua ad adottare alberi e monitora il tuo impatto crescere nel tempo. Insieme possiamo fare la differenza 
+                <p className="text-gray-700 leading-relaxed text-lg text-center">
+                  Continua a piantare alberi e monitora il tuo impatto crescere nel tempo. Insieme possiamo fare la differenza 
                   per il nostro pianeta, un albero alla volta!
                 </p>
               </div>
@@ -170,18 +170,16 @@ interface MetricCardProps {
 
 const MetricCard: React.FC<MetricCardProps> = ({ title, value, description, icon, color }) => {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <div className={`bg-gradient-to-br ${color} p-6`}>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-white">{title}</h3>
-          <div className="bg-white/20 p-2 rounded-lg">
-            {icon}
-          </div>
+    <Card className="overflow-hidden hover:shadow-2xl transition-shadow duration-300 rounded-2xl border-nutella-beige bg-white w-full max-w-xs flex flex-col items-center text-center animate-fade-in">
+      <div className={`bg-gradient-to-br ${color} p-8 flex flex-col items-center justify-center`}>
+        <div className="mb-4 animate-bounce-slow">
+          {icon}
         </div>
-        <p className="text-3xl font-bold text-white">{value}</p>
+        <p className="text-4xl font-extrabold text-white mb-2 drop-shadow">{value}</p>
+        <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
       </div>
-      <CardContent className="p-4">
-        <p className="text-sm text-gray-600">{description}</p>
+      <CardContent className="p-6">
+        <p className="text-base text-gray-600">{description}</p>
       </CardContent>
     </Card>
   );
@@ -196,15 +194,13 @@ interface ComparisonCardProps {
 
 const ComparisonCard: React.FC<ComparisonCardProps> = ({ title, value, description, icon }) => {
   return (
-    <div className="bg-nutella-beige/10 rounded-lg p-6">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="bg-nutella-green/10 p-3 rounded-lg">
-          {icon}
-        </div>
-        <h3 className="text-lg font-semibold text-nutella-brown">{title}</h3>
+    <div className="bg-nutella-beige/30 rounded-xl p-8 flex flex-col items-center text-center shadow-md border border-nutella-beige animate-fade-in">
+      <div className="mb-4 animate-bounce-slow">
+        {icon}
       </div>
-      <p className="text-2xl font-bold text-nutella-brown mb-1">{value}</p>
-      <p className="text-sm text-gray-600">{description}</p>
+      <h3 className="text-lg font-semibold text-nutella-brown mb-2">{title}</h3>
+      <p className="text-3xl font-bold text-nutella-brown mb-1">{value}</p>
+      <p className="text-base text-gray-600">{description}</p>
     </div>
   );
 };

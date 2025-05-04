@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
@@ -28,6 +27,21 @@ const TreeDetailPage: React.FC = () => {
       setTree(foundTree || null);
     }
   }, [trees, treeId]);
+
+  // Get a random tree image based on the tree's ID
+  const getTreeImage = (id: string) => {
+    if (!tree) return '/placeholder.svg';
+    const species = tree.species.toLowerCase();
+    if (species.includes('quercia') || species.includes('oak') || species.includes('leccio')) return '/Quercia solitaria su sfondo grigio.png';
+    if (species.includes('pino') || species.includes('pine') || species.includes('abete') || species.includes('fir')) return '/Albero di pino solitario.png';
+    if (species.includes('acero') || species.includes('maple')) return '/Albero di acero in primo piano.png';
+    if (species.includes('betulla') || species.includes('birch')) return '/Albero di betulla su sfondo bianco.png';
+    if (species.includes('ciliegio') || species.includes('cherry')) return '/Ciliegi in Fiore contro lo Sfondo Neutro.png';
+    if (species.includes('melo') || species.includes('apple')) return '/Albero di mele in fiore.png';
+    if (species.includes('olivo') || species.includes('olive') || species.includes('ulivo')) return '/Albero di olivo solitario.png';
+    if (species.includes('cipresso') || species.includes('cypress')) return '/Cipresso solitario su sfondo neutro.png';
+    return '/placeholder.svg';
+  };
 
   if (loading) {
     return (
@@ -92,9 +106,12 @@ const TreeDetailPage: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            <div className="bg-gradient-to-br from-nutella-green to-nutella-darkgreen p-8 rounded-lg flex items-center justify-center mb-6">
-              <TreeDeciduous className="h-32 w-32 text-white" />
-            </div>
+            <img
+              src={getTreeImage(tree.id)}
+              alt={`Foto di un albero di specie ${tree.species}`}
+              className="h-64 w-full object-cover rounded-lg mb-6 border border-nutella-beige bg-white"
+              onError={e => (e.currentTarget.src = '/placeholder.svg')}
+            />
             
             <Card>
               <CardContent className="p-6">

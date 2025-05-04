@@ -33,7 +33,7 @@ const AboutPage: React.FC = () => {
                 Nel 2024, abbiamo lanciato questa iniziativa con l'obiettivo di piantare 1 milione di alberi entro il 2030.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                Ogni barattolo di Nutella contiene un codice unico che ti permette di adottare un albero reale.
+                Ogni barattolo di Nutella contiene un codice unico che ti permette di piantare un albero reale.
                 Questi alberi vengono piantati in aree strategiche del nostro paese, contribuendo alla riforestazione
                 e alla creazione di habitat naturali.
               </p>
@@ -137,7 +137,7 @@ const AboutPage: React.FC = () => {
                   <h3 className="text-xl font-bold mb-2 text-nutella-brown">Acquista un Barattolo Nutella</h3>
                   <p className="text-gray-600">
                     Ogni barattolo Nutella Forest contiene un codice unico all'interno della confezione. 
-                    Questo codice è la chiave per adottare il tuo albero.
+                    Questo codice è la chiave per piantare il tuo albero.
                   </p>
                 </div>
               </div>
@@ -158,7 +158,7 @@ const AboutPage: React.FC = () => {
                   3
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-nutella-brown">Adotta il Tuo Albero</h3>
+                  <h3 className="text-xl font-bold mb-2 text-nutella-brown">Pianta il Tuo Albero</h3>
                   <p className="text-gray-600">
                     Dagli un nome al tuo albero e scopri la sua posizione esatta nella foresta Nutella. 
                     Riceverai informazioni sulla specie e sul suo contributo all'ambiente.

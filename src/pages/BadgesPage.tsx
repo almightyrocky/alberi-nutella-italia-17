@@ -1,12 +1,19 @@
-
 import React, { useEffect } from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import { useTreeStore } from '@/stores/treeStore';
 import { useBadgeStore } from '@/stores/badgeStore';
-import { Loader2, Lock, Check, Trophy, Gift } from 'lucide-react';
+import { Loader2, Lock, Check, Trophy, Award, Leaf, TreeDeciduous } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Layout from '@/components/Layout';
 import { Badge } from "@/components/ui/badge";
+import clsx from 'clsx';
+
+const badgeIcons: { [key: string]: React.ReactNode } = {
+  'badge-1': <Award className="w-16 h-16 text-yellow-500 drop-shadow-md" />,
+  'badge-2': <Leaf className="w-16 h-16 text-green-600 drop-shadow-md" />,
+  'badge-3': <TreeDeciduous className="w-16 h-16 text-nutella-green drop-shadow-md" />,
+  'badge-4': <Trophy className="w-16 h-16 text-nutella-red drop-shadow-md" />,
+};
 
 const BadgesPage: React.FC = () => {
   const { user } = useAuthStore();
@@ -35,16 +42,35 @@ const BadgesPage: React.FC = () => {
     return badge?.unlockedAt ? new Date(badge.unlockedAt).toLocaleDateString('it-IT') : null;
   };
 
+  // Trova il badge sbloccato più recente
+  const latestUnlocked = unlockedBadges.length > 0 ? unlockedBadges.reduce((a, b) => (a.unlockedAt > b.unlockedAt ? a : b)) : null;
+  // Trova il prossimo badge da sbloccare
+  const nextBadge = badges.find(b => !isUnlocked(b.id));
+
   return (
     <Layout>
       <div className="container mx-auto py-8 px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-display font-bold text-nutella-brown mb-2">
-            I Tuoi Obiettivi
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-display font-extrabold text-nutella-brown mb-2 tracking-tight drop-shadow-sm">
+            I Tuoi Obiettivi 🌱
           </h1>
-          <p className="text-gray-600">
-            Adotta alberi e sblocca badge speciali o premi esclusivi per il tuo contributo alla riforestazione.
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-4">
+            Pianta alberi, sblocca badge esclusivi e diventa un eroe della Nutella Forest! Ogni traguardo raggiunto è un passo verso un pianeta più verde.
           </p>
+          <div className="w-full max-w-xl mx-auto mb-4">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-sm font-medium text-nutella-brown">Progresso totale</span>
+              <span className="text-sm font-medium text-nutella-green">{trees.length} alberi</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+              <div className="bg-gradient-to-r from-nutella-green to-green-400 h-4 rounded-full transition-all duration-700" style={{ width: `${Math.min((trees.length / 20) * 100, 100)}%` }}></div>
+            </div>
+          </div>
+          {nextBadge && (
+            <div className="mt-2 text-sm text-gray-600">
+              Prossimo obiettivo: <span className="font-semibold text-nutella-brown">{nextBadge.name}</span> ({nextBadge.requirement.count} alberi)
+            </div>
+          )}
         </div>
 
         {loading ? (
@@ -61,46 +87,28 @@ const BadgesPage: React.FC = () => {
           </div>
         ) : (
           <>
-            <div className="mb-8 p-6 bg-gradient-to-br from-nutella-beige/30 to-nutella-beige/10 rounded-lg">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-bold text-nutella-brown mb-2">Il tuo progresso</h2>
-                  <p className="text-gray-600">Hai adottato {trees.length} alberi finora</p>
-                </div>
-                <div className="text-right">
-                  <Badge 
-                    className={trees.length >= 20 ? "bg-nutella-green" : "bg-gray-300"} 
-                    variant="default"
-                  >
-                    {trees.length >= 20 ? "Premio sbloccato!" : `${trees.length}/20 per il premio speciale`}
-                  </Badge>
-                </div>
-              </div>
-              
-              {trees.length >= 20 && (
-                <div className="mt-6 p-4 bg-nutella-beige/40 rounded-lg flex items-center">
-                  <Gift className="h-8 w-8 text-nutella-red mr-3" />
-                  <div>
-                    <h3 className="font-semibold text-nutella-brown">Premio Speciale Sbloccato!</h3>
-                    <p className="text-gray-600">Hai raggiunto 20 alberi! Contatta il servizio clienti Nutella per ricevere il tuo premio esclusivo.</p>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12 justify-items-center mt-12">
               {badges.map((badge) => {
                 const unlocked = isUnlocked(badge.id);
+                const isLatest = latestUnlocked && badge.id === latestUnlocked.id;
                 return (
                   <Card 
                     key={badge.id} 
-                    className={`overflow-hidden transition-all duration-300 ${unlocked ? 'border-nutella-green shadow-md' : 'border-gray-200 opacity-75'}`}
+                    className={clsx(
+                      "relative overflow-hidden transition-all duration-300 border-2 rounded-2xl shadow-xl group flex flex-col items-center w-full max-w-xs min-h-[370px] bg-white",
+                      unlocked ? 'border-nutella-gold shadow-2xl' : 'border-gray-200 bg-nutella-beige/20 opacity-80',
+                      isLatest ? 'ring-4 ring-nutella-gold/60 animate-pulse-slow' : ''
+                    )}
+                    style={{ boxShadow: unlocked ? '0 0 32px 0 rgba(229,161,0,0.15), 0 4px 24px 0 rgba(0,0,0,0.08)' : undefined }}
                   >
-                    <div className={`h-2 ${unlocked ? 'bg-nutella-green' : 'bg-gray-300'} rounded-t-md`}></div>
-                    <CardHeader className="relative">
+                    {isLatest && (
+                      <span className="absolute top-3 left-3 bg-nutella-gold text-white text-xs font-bold px-3 py-1 rounded-full z-10 animate-bounce">Nuovo!</span>
+                    )}
+                    <div className={clsx("h-2 w-full", unlocked ? 'bg-gradient-to-r from-nutella-gold to-nutella-green' : 'bg-gray-200', "rounded-t-2xl")}></div>
+                    <CardHeader className="relative pb-2 w-full flex flex-col items-center">
                       <div className="absolute top-4 right-4">
                         {unlocked ? (
-                          <div className="bg-nutella-green text-white rounded-full p-1">
+                          <div className="bg-nutella-gold text-white rounded-full p-1 animate-bounce">
                             <Check className="h-5 w-5" />
                           </div>
                         ) : (
@@ -109,40 +117,42 @@ const BadgesPage: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      <CardTitle className="flex items-center">
+                      <CardTitle className="flex items-center gap-2 text-2xl font-bold text-center text-nutella-brown">
                         {badge.name}
-                        {badge.id === "badge-4" && <Trophy className="h-5 w-5 ml-2 text-nutella-red" />}
+                        {badge.id === "badge-4" && <Trophy className="h-5 w-5 ml-2 text-nutella-gold" />}
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-lg text-gray-700 text-center">
                         {badge.description}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex flex-col items-center">
-                      <div className={`relative w-24 h-24 rounded-full mb-4 flex items-center justify-center ${unlocked ? 'bg-nutella-green/20' : 'bg-gray-200'}`}>
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-nutella-green to-nutella-darkgreen flex items-center justify-center">
-                          {/* Badge icon */}
-                          <span className="text-4xl text-white">🌳</span>
+                    <CardContent className="flex flex-col items-center flex-1 justify-center">
+                      <div className={clsx(
+                        "relative w-32 h-32 rounded-full mb-4 flex items-center justify-center border-4 transition-all duration-300 bg-white",
+                        unlocked ? 'border-nutella-gold shadow-lg animate-bounce-in' : 'border-gray-200 bg-gray-100 opacity-70'
+                      )}>
+                        <div className={clsx("absolute inset-0 flex items-center justify-center w-full h-full", unlocked ? '' : 'grayscale opacity-60')}
+                        >
+                          {badgeIcons[badge.id] || <Award className="w-16 h-16 text-gray-400" />}
                         </div>
                       </div>
-                      
                       <div className="w-full mt-2">
                         <div className="flex justify-between mb-1">
-                          <span className="text-sm font-medium text-gray-600">Progresso:</span>
-                          <span className="text-sm font-medium text-gray-600">
+                          <span className="text-base font-medium text-gray-600">Progresso:</span>
+                          <span className="text-base font-medium text-gray-600">
                             {Math.min(trees.length, badge.requirement.count)}/{badge.requirement.count} alberi
                           </span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
                           <div 
-                            className="bg-nutella-green h-2 rounded-full transition-all duration-500" 
+                            className={clsx("h-4 rounded-full transition-all duration-700", unlocked ? 'bg-gradient-to-r from-nutella-gold to-nutella-green' : 'bg-nutella-green/40')}
                             style={{ width: `${(Math.min(trees.length, badge.requirement.count) / badge.requirement.count) * 100}%` }} 
                           ></div>
                         </div>
                       </div>
-                      
                       {unlocked && (
-                        <p className="text-sm text-nutella-green mt-4">
-                          Sbloccato il {getUnlockDate(badge.id)}
+                        <p className="text-base text-nutella-gold mt-4 animate-fade-in text-center font-semibold">
+                          Sbloccato il {getUnlockDate(badge.id)}<br/>
+                          <span className="text-xs text-gray-500">Continua così, eroe della foresta!</span>
                         </p>
                       )}
                     </CardContent>

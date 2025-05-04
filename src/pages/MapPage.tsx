@@ -103,7 +103,7 @@ const MapPage: React.FC = () => {
             Mappa della Foresta
           </h1>
           <p className="text-gray-600">
-            Visualizza la posizione dei tuoi alberi e scopri gli altri alberi adottati nella foresta Nutella.
+            Visualizza la posizione dei tuoi alberi e scopri gli altri alberi piantati nella foresta Nutella.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ const MapPage: React.FC = () => {
             className="bg-nutella-green hover:bg-nutella-darkgreen w-full md:w-auto"
             onClick={() => navigate('/dashboard')}
           >
-            <Plus className="h-4 w-4 mr-2" /> Adotta un nuovo albero
+            <Plus className="h-4 w-4 mr-2" /> Pianta un nuovo albero
           </Button>
         </div>
 

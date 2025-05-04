@@ -35,20 +35,25 @@ const HomePage: React.FC = () => {
     <Layout>
       {/* Hero Section with Dynamic Background */}
       <section className="relative py-16 md:py-24 overflow-hidden">
-        {/* Background with multiple layers for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-nutella-brown/10 to-white/70 z-0"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22 width=%2280%22 height=%2280%22 opacity=%22.05%22%3E%3Cpath d=%22M40 0c22.091 0 40 17.909 40 40S62.091 80 40 80 0 62.091 0 40 17.909 0 40 0z%22 fill=%22%232E7D32%22/%3E%3C/svg%3E')] z-0"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent z-0"></div>
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/SFONDO HERO.jpg" 
+            alt="Sfondo Hero Nutella Forest" 
+            className="w-full h-full object-cover object-center" 
+            style={{ filter: 'brightness(0.85) blur(0px)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-white/40"></div>
+        </div>
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-10 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-display font-bold text-nutella-brown mb-6">
-                Adotta un albero con <span className="inline-flex"><span className="text-black">n</span><span className="text-nutella-red">utella</span></span>
+              <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white drop-shadow-lg">
+                Pianta un albero con grazie al tuo <span className="text-nutella-red drop-shadow">bicchiere</span>
               </h1>
-              <p className="text-lg mb-8 text-gray-700">
-                Entra a far parte della Nutella Forest: ogni barattolo di Nutella
-                contribuisce alla riforestazione e alla sostenibilità del nostro pianeta.
+              <p className="text-lg mb-8 text-white drop-shadow-md">
+                Entra a far parte della <span className="font-bold drop-shadow" style={{ color: '#e5a100' }}>Nutella Forest</span>: ogni barattolo di Nutella contribuisce alla riforestazione e alla sostenibilità del nostro pianeta.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -112,39 +117,36 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-nutella-beige/60">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-nutella-brown mb-12">
+          <h2 className="text-4xl font-display font-extrabold text-center text-nutella-brown mb-14 tracking-tight drop-shadow">
             Come funziona?
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-nutella-beige/50 rounded-lg p-6 text-center">
-              <div className="bg-nutella-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="bg-white rounded-2xl p-8 text-center shadow-xl border border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300">
+              <div className="bg-nutella-gold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                <Users className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-nutella-brown">Registrati</h3>
-              <p className="text-gray-700">
+              <h3 className="text-2xl font-bold mb-3 text-nutella-brown">Registrati</h3>
+              <p className="text-gray-700 text-lg">
                 Crea un account per iniziare il tuo viaggio nella Nutella Forest.
               </p>
             </div>
-            
-            <div className="bg-nutella-beige/50 rounded-lg p-6 text-center">
-              <div className="bg-nutella-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TreeDeciduous className="h-8 w-8 text-white" />
+            <div className="bg-nutella-green/10 rounded-2xl p-8 text-center shadow-xl border border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300">
+              <div className="bg-nutella-green w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                <TreeDeciduous className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-nutella-brown">Adotta un Albero</h3>
-              <p className="text-gray-700">
-                Usa il codice che trovi nel barattolo Nutella per adottare un albero vero.
+              <h3 className="text-2xl font-bold mb-3 text-nutella-brown">Pianta un Albero</h3>
+              <p className="text-gray-700 text-lg">
+                Usa il codice che trovi nel barattolo Nutella per piantare un albero vero.
               </p>
             </div>
-            
-            <div className="bg-nutella-beige/50 rounded-lg p-6 text-center">
-              <div className="bg-nutella-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="h-8 w-8 text-white" />
+            <div className="bg-nutella-red/10 rounded-2xl p-8 text-center shadow-xl border border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300">
+              <div className="bg-nutella-red w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                <Award className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-nutella-brown">Guadagna Badge</h3>
-              <p className="text-gray-700">
+              <h3 className="text-2xl font-bold mb-3 text-nutella-brown">Guadagna Badge</h3>
+              <p className="text-gray-700 text-lg">
                 Segui la crescita del tuo albero e guadagna badge speciali per il tuo contributo.
               </p>
             </div>
@@ -153,36 +155,32 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Features */}
-      <section className="py-16 bg-nutella-beige/30">
+      <section className="py-20 bg-nutella-beige/30">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-nutella-brown mb-12">
+          <h2 className="text-4xl font-display font-extrabold text-center text-nutella-brown mb-14 tracking-tight drop-shadow">
             Cosa ti offriamo
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mr-4">
-                  <TreeDeciduous className="h-10 w-10 text-nutella-green" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3 text-nutella-brown">Mappa Interattiva</h3>
-                  <p className="text-gray-700">
-                    Visualizza la posizione esatta del tuo albero e scopri gli altri alberi adottati nella foresta Nutella.
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="bg-white rounded-2xl p-8 shadow-xl border border-nutella-beige flex items-start gap-6 hover:scale-105 hover:shadow-2xl transition-all duration-300">
+              <div className="flex-shrink-0">
+                <TreeDeciduous className="h-14 w-14 text-nutella-green" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold mb-3 text-nutella-brown">Mappa Interattiva</h3>
+                <p className="text-gray-700 text-lg">
+                  Visualizza la posizione esatta del tuo albero e scopri gli altri alberi piantati nella foresta Nutella.
+                </p>
               </div>
             </div>
-            
-            <div className="bg-white rounded-lg p-6 shadow-md">
-              <div className="flex items-start">
-                <BarChart className="h-10 w-10 text-nutella-green mt-1 mr-4 flex-shrink-0" />
-                <div>
-                  <h3 className="text-xl font-bold mb-3 text-nutella-brown">Impatto Ambientale</h3>
-                  <p className="text-gray-700">
-                    Monitora l'impatto positivo del tuo albero sull'ambiente con metriche dettagliate in tempo reale.
-                  </p>
-                </div>
+            <div className="bg-white rounded-2xl p-8 shadow-xl border border-nutella-beige flex items-start gap-6 hover:scale-105 hover:shadow-2xl transition-all duration-300">
+              <div className="flex-shrink-0">
+                <BarChart className="h-14 w-14 text-nutella-gold" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold mb-3 text-nutella-brown">Impatto Ambientale</h3>
+                <p className="text-gray-700 text-lg">
+                  Monitora l'impatto positivo del tuo albero sull'ambiente con metriche dettagliate in tempo reale.
+                </p>
               </div>
             </div>
           </div>
@@ -190,23 +188,29 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-nutella-brown text-white">
+      <section className="py-20 bg-gradient-to-br from-nutella-green/90 to-nutella-gold/80 text-white">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-display font-extrabold mb-8 drop-shadow-lg">
             Unisciti alla Nutella Forest
           </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
+          <p className="text-2xl mb-10 max-w-3xl mx-auto drop-shadow">
             Ogni albero conta. Contribuisci a rendere il nostro pianeta più verde, un barattolo di Nutella alla volta.
           </p>
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex justify-center items-center gap-6 flex-wrap">
             <Button
-              className="bg-nutella-red hover:bg-nutella-red/90 text-lg py-6 px-8"
+              className="bg-nutella-red hover:bg-nutella-green text-lg py-6 px-10 rounded-full font-bold shadow-xl border-2 border-nutella-red transition-all duration-200"
               onClick={() => navigate(isAuthenticated ? '/dashboard' : '/register')}
             >
               {isAuthenticated ? 'Vai alla tua foresta' : 'Inizia ora'}
               <ArrowRight className="ml-2" />
             </Button>
-            <TreeDeciduous className="h-16 w-16 text-white" />
+            <Button
+              variant="outline"
+              className="border-nutella-gold text-nutella-gold hover:bg-nutella-gold/10 text-lg py-6 px-10 rounded-full font-bold shadow-xl"
+              onClick={() => navigate('/about')}
+            >
+              Scopri di più
+            </Button>
           </div>
         </div>
       </section>

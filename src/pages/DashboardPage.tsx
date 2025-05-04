@@ -85,7 +85,7 @@ const DashboardPage: React.FC = () => {
               Benvenuto nella tua foresta, {user?.name}
             </h1>
             <p className="text-lg text-gray-700">
-              Qui puoi vedere tutti i tuoi alberi adottati e adottarne di nuovi.
+              Qui puoi vedere tutti i tuoi alberi piantati e piantarne di nuovi.
               Ogni albero contribuisce a rendere il mondo più verde.
             </p>
           </div>
@@ -101,12 +101,12 @@ const DashboardPage: React.FC = () => {
             <DialogTrigger asChild>
               <Button className="bg-nutella-green hover:bg-nutella-darkgreen px-6">
                 <PlusCircle className="h-5 w-5 mr-2" />
-                Adotta un albero
+                Pianta un albero
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle className="text-2xl font-display text-nutella-brown">Adotta un nuovo albero</DialogTitle>
+                <DialogTitle className="text-2xl font-display text-nutella-brown">Pianta un nuovo albero</DialogTitle>
                 <DialogDescription className="text-gray-600">
                   Inserisci il codice che trovi nel barattolo Nutella e dai un nome al tuo albero.
                 </DialogDescription>
@@ -158,10 +158,10 @@ const DashboardPage: React.FC = () => {
                       {isAdopting ? (
                         <>
                           <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                          Adozione in corso...
+                          Pianta albero...
                         </>
                       ) : (
-                        'Adotta albero'
+                        'Pianta albero'
                       )}
                     </Button>
                   </DialogFooter>
@@ -179,16 +179,16 @@ const DashboardPage: React.FC = () => {
         ) : trees.length === 0 ? (
           <div className="text-center py-16 bg-nutella-beige/20 rounded-xl">
             <TreeDeciduous className="h-16 w-16 text-nutella-green mx-auto mb-4 opacity-70" />
-            <h3 className="text-xl font-semibold text-nutella-brown mb-2">Nessun albero adottato</h3>
-            <p className="text-gray-600 mb-6">
-              Non hai ancora adottato nessun albero. Compra un barattolo di Nutella e usa il codice per adottarne uno!
+            <h3 className="text-xl font-semibold text-nutella-brown mb-2">Nessun albero piantato</h3>
+            <p className="text-gray-600 mb-4">
+              Non hai ancora piantato nessun albero. Compra un barattolo di Nutella e usa il codice per piantarne uno!
             </p>
             <Button 
               onClick={() => setDialogOpen(true)}
               className="bg-nutella-green hover:bg-nutella-darkgreen"
             >
               <PlusCircle className="h-5 w-5 mr-2" />
-              Adotta il tuo primo albero
+              Pianta il tuo primo albero
             </Button>
           </div>
         ) : (
@@ -230,13 +230,13 @@ const DashboardPage: React.FC = () => {
                   className="border-nutella-green text-nutella-green hover:bg-nutella-green/10"
                   onClick={() => navigate('/map')}
                 >
-                  Vedi mappa completa
+                  Pianta un nuovo albero
                 </Button>
               </div>
             </div>
 
             {/* Tree Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-8 justify-items-center">
               {trees.map((tree: Tree) => (
                 <TreeCard 
                   key={tree.id} 
@@ -267,37 +267,57 @@ const TreeCard: React.FC<TreeCardProps> = ({ tree, onClick }) => {
     return new Date(dateString).toLocaleDateString('it-IT', options);
   };
 
+  const getTreeImage = () => {
+    const species = tree.species.toLowerCase();
+    if (species.includes('quercia') || species.includes('oak') || species.includes('leccio')) return '/Quercia solitaria su sfondo grigio.png';
+    if (species.includes('pino') || species.includes('pine') || species.includes('abete') || species.includes('fir')) return '/Albero di pino solitario.png';
+    if (species.includes('acero') || species.includes('maple')) return '/Albero di acero in primo piano.png';
+    if (species.includes('betulla') || species.includes('birch')) return '/Albero di betulla su sfondo bianco.png';
+    if (species.includes('ciliegio') || species.includes('cherry')) return '/Ciliegi in Fiore contro lo Sfondo Neutro.png';
+    if (species.includes('melo') || species.includes('apple')) return '/Albero di mele in fiore.png';
+    if (species.includes('olivo') || species.includes('olive') || species.includes('ulivo')) return '/Albero di olivo solitario.png';
+    if (species.includes('cipresso') || species.includes('cypress')) return '/Cipresso solitario su sfondo neutro.png';
+    return '/placeholder.svg';
+  };
+
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 border-nutella-beige bg-white">
+    <Card className="overflow-hidden hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 border-nutella-beige bg-white rounded-2xl w-full max-w-xs min-h-[420px] flex flex-col justify-between relative group">
       <CardHeader className="p-0">
-        <div className="bg-gradient-to-br from-nutella-green to-nutella-darkgreen p-8 flex items-center justify-center">
-          <TreeDeciduous className="h-24 w-24 text-white" />
+        <img
+          src={getTreeImage()}
+          alt={`Foto di un albero di specie ${tree.species}`}
+          className="h-56 w-full object-cover rounded-t-2xl border-b border-nutella-beige bg-white group-hover:brightness-110 transition-all duration-300"
+          onError={e => (e.currentTarget.src = '/placeholder.svg')}
+        />
+        {/* Badge overlay esempio */}
+        <div className="absolute top-4 right-4 z-10">
+          <span className="bg-nutella-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow-md animate-bounce">Badge</span>
         </div>
       </CardHeader>
-      <CardContent className="p-6">
+      <CardContent className="p-6 flex-1 flex flex-col justify-between">
         <h3 className="text-2xl font-bold text-nutella-brown mb-2">{tree.name}</h3>
         <p className="text-sm text-gray-600 mb-6">
-          {tree.species} - Adottato il {formatDate(tree.adoptedAt)}
+          {tree.species} - Piantato il {formatDate(tree.adoptedAt)}
         </p>
-        <div className="space-y-3">
+        <div className="space-y-3 mb-4">
           <div className="flex justify-between items-center">
             <span className="text-gray-600">CO₂ assorbita:</span>
-            <span className="font-medium text-nutella-brown">{tree.metrics.co2Absorbed} kg</span>
+            <span className="font-medium text-nutella-green text-lg animate-pulse">{tree.metrics.co2Absorbed} kg</span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-gray-600">Ossigeno prodotto:</span>
-            <span className="font-medium text-nutella-brown">{tree.metrics.oxygenProduced} kg</span>
+            <span className="font-medium text-nutella-green text-lg animate-pulse">{tree.metrics.oxygenProduced} kg</span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-gray-600">Acqua risparmiata:</span>
-            <span className="font-medium text-nutella-brown">{tree.metrics.waterSaved} L</span>
+            <span className="font-medium text-nutella-green text-lg animate-pulse">{tree.metrics.waterSaved} L</span>
           </div>
         </div>
       </CardContent>
-      <CardFooter className="bg-nutella-beige/10 px-6 py-4">
+      <CardFooter className="bg-nutella-beige/10 px-6 py-4 flex flex-col gap-2">
         <Button 
           variant="outline" 
-          className="w-full border-nutella-green text-nutella-green hover:bg-nutella-green hover:text-white"
+          className="w-full border-nutella-green text-nutella-green hover:bg-nutella-green hover:text-white rounded-full font-bold shadow-md transition-all duration-200"
           onClick={onClick}
         >
           Visualizza dettagli

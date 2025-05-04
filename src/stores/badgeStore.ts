@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 import { Badge, Tree } from '@/types';
 import { toast } from 'sonner';
@@ -18,42 +17,30 @@ const mockBadges: Badge[] = [
   {
     id: "badge-1",
     name: "Primo Albero",
-    description: "Hai adottato il tuo primo albero!",
+    description: "Hai piantato il tuo primo albero!",
     image: "/badges/first-tree.svg",
-    requirement: {
-      type: "trees",
-      count: 1
-    }
+    requirement: { type: "trees", count: 1 }
   },
   {
     id: "badge-2",
-    name: "Guardiano della Foresta",
-    description: "Hai adottato 5 alberi!",
+    name: "Amante della Natura",
+    description: "Hai piantato 5 alberi!",
     image: "/badges/forest-guardian.svg",
-    requirement: {
-      type: "trees",
-      count: 5
-    }
+    requirement: { type: "trees", count: 5 }
   },
   {
     id: "badge-3",
-    name: "Protettore del Pianeta",
-    description: "Hai adottato 10 alberi!",
+    name: "Guardiano della Foresta",
+    description: "Hai piantato 10 alberi!",
     image: "/badges/planet-protector.svg",
-    requirement: {
-      type: "trees",
-      count: 10
-    }
+    requirement: { type: "trees", count: 10 }
   },
   {
     id: "badge-4",
-    name: "Eroe della Terra",
-    description: "Hai adottato 20 alberi!",
+    name: "Eroe della Foresta",
+    description: "Hai piantato 20 alberi!",
     image: "/badges/earth-hero.svg",
-    requirement: {
-      type: "trees",
-      count: 20
-    }
+    requirement: { type: "trees", count: 20 }
   }
 ];
 

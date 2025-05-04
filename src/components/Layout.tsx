@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useAuthStore } from '@/stores/authStore';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -68,23 +67,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg border-b border-nutella-beige/60">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link to="/" className="flex items-center">
-            <NutellaLogo size="lg" />
-            <span className="font-display text-lg md:text-xl font-bold text-nutella-green ml-1">Forest</span>
+          <Link to="/" className="flex items-center gap-2">
+            <NutellaLogo size="xl" />
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 className={cn(
-                  "flex items-center text-sm font-medium transition-colors hover:text-nutella-green",
+                  "flex items-center text-base font-semibold transition-colors px-3 py-1 rounded-lg hover:bg-nutella-green/10 hover:text-nutella-green",
                   location.pathname === item.path
-                    ? "text-nutella-green"
+                    ? "text-nutella-green bg-nutella-green/10"
                     : "text-nutella-brown"
                 )}
               >
@@ -92,6 +90,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 {item.name}
               </Link>
             ))}
+            <Button 
+              variant="default" 
+              onClick={() => navigate(isAuthenticated ? '/dashboard' : '/login')}
+              className="bg-nutella-red hover:bg-nutella-green text-white font-bold px-6 py-2 rounded-full shadow-md border-2 border-nutella-red transition-all duration-200"
+            >
+              {isAuthenticated ? 'La tua foresta' : 'Accedi'}
+            </Button>
           </nav>
           
           <div className="flex items-center gap-3">
@@ -189,17 +194,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       )}
 
       {/* Footer */}
-      <footer className="bg-nutella-beige text-nutella-brown py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <p className="text-sm">&copy; 2025 Nutella Forest Italia. Tutti i diritti riservati.</p>
+      <footer className="bg-nutella-brown text-white py-8 mt-8 shadow-inner border-t-4 border-nutella-green">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2 mb-4 md:mb-0">
+            <NutellaLogo size="lg" />
+          </div>
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <p className="text-sm">&copy; 2025 Nutella Forest Italia. Tutti i diritti riservati.</p>
+            <div className="flex space-x-4 mt-1">
+              <Link to="/privacy" className="text-sm hover:underline text-nutella-beige">Privacy</Link>
+              <Link to="/terms" className="text-sm hover:underline text-nutella-beige">Termini</Link>
+              <a href="https://www.instagram.com/nutellaitalia/" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline text-nutella-gold font-bold">Instagram</a>
+              <a href="https://www.facebook.com/Nutella.Italia/" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline text-nutella-gold font-bold">Facebook</a>
             </div>
-            <div className="flex space-x-4">
-              <Link to="/privacy" className="text-sm hover:underline">Privacy</Link>
-              <Link to="/terms" className="text-sm hover:underline">Termini e Condizioni</Link>
-              <Link to="/contact" className="text-sm hover:underline">Contatti</Link>
-            </div>
+            <p className="text-xs text-nutella-gold mt-2">Insieme per un futuro più verde</p>
           </div>
         </div>
       </footer>

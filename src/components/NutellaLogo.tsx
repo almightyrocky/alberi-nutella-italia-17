@@ -1,9 +1,8 @@
-
 import React from 'react';
 
 interface NutellaLogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const NutellaLogo: React.FC<NutellaLogoProps> = ({ 
@@ -14,6 +13,7 @@ const NutellaLogo: React.FC<NutellaLogoProps> = ({
     sm: 'text-base md:text-lg',
     md: 'text-lg md:text-xl',
     lg: 'text-xl md:text-2xl',
+    xl: 'text-2xl md:text-4xl'
   };
 
   return (
