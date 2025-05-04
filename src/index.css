@@ -1,5 +1,3 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700&display=swap');
 
 @tailwind base;
@@ -168,5 +166,79 @@ html {
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+/* --- MICRO-ANIMAZIONI PROFESSIONALI --- */
+
+/* Pulsante: effetto press (click) */
+.button-press:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px 0 rgba(93, 64, 55, 0.10);
+}
+
+/* Card/Sezione: fade-in + translateY */
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Icona: pulse su hover */
+.icon-pulse:hover {
+  animation: iconPulse 0.5s;
+}
+@keyframes iconPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* Icona: wiggle su hover */
+.icon-wiggle:hover {
+  animation: iconWiggle 0.4s;
+}
+@keyframes iconWiggle {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-10deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-6deg); }
+  80% { transform: rotate(6deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Avatar: ripple/scale su hover */
+.avatar-ripple:hover {
+  box-shadow: 0 0 0 4px #43a04733;
+  transform: scale(1.06);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+/* Progress bar: transizione width fluida */
+.progress-animated {
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Badge: pulse per badge nuovi/sbloccati */
+.badge-pulse {
+  animation: badgePulse 1.2s infinite;
+}
+@keyframes badgePulse {
+  0% { box-shadow: 0 0 0 0 #e5a10055; }
+  70% { box-shadow: 0 0 0 12px #e5a10000; }
+  100% { box-shadow: 0 0 0 0 #e5a10000; }
+}
+
+/* Modale/Toast: fade+scale in entrata */
+.animate-modal-in {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: modalIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
 }
 

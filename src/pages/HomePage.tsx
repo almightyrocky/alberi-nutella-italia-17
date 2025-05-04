@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
   return (
     <Layout>
       {/* HERO SECTION - Nutella style, glass effect, big logo, CTA */}
-      <section className="relative py-24 md:py-36 overflow-hidden bg-gradient-to-br from-nutella-beige/90 via-white/90 to-nutella-gold/20">
+      <section className="relative py-24 md:py-36 overflow-hidden bg-gradient-to-br from-nutella-beige/90 via-white/90 to-nutella-gold/20 animate-fade-in-up">
         <div className="absolute inset-0 z-0">
           <img 
             src="/SFONDO HERO.jpg" 
@@ -72,7 +72,7 @@ const HomePage: React.FC = () => {
             {/* Community Counter with Avatars */}
             <div className="mt-12 bg-white/80 backdrop-blur-xl rounded-3xl p-6 border border-nutella-beige shadow-xl flex flex-col gap-2 w-full max-w-md animate-fade-in">
               <div className="flex items-center mb-1">
-                <Users className="h-7 w-7 text-nutella-brown mr-3" />
+                <Users className="h-7 w-7 text-nutella-brown mr-3 icon-pulse" />
                 <div>
                   <p className="text-base font-medium text-nutella-brown">La nostra community</p>
                   <p className="text-3xl font-bold text-nutella-red">
@@ -82,7 +82,7 @@ const HomePage: React.FC = () => {
               </div>
               <div className="flex -space-x-2 overflow-hidden mt-2">
                 {mockProfiles.map((profile, index) => (
-                  <Avatar key={index} className="border-2 border-white w-10 h-10">
+                  <Avatar key={index} className="border-2 border-white w-10 h-10 avatar-ripple">
                     {profile.src ? (
                       <AvatarImage src={profile.src} alt={profile.name} />
                     ) : (
@@ -103,7 +103,7 @@ const HomePage: React.FC = () => {
               <img 
                 src="/lovable-uploads/c04417a4-ee30-4aa5-8c69-94197c0326d0.png" 
                 alt="Nutella Forest - Un cucchiaio per te, un albero per tutti" 
-                className="w-80 md:w-[28rem] h-auto rounded-3xl border-4 border-nutella-gold shadow-2xl bg-white/80"
+                className="w-80 md:w-[28rem] h-auto rounded-3xl border-4 border-nutella-gold shadow-2xl bg-white/80 transition-transform duration-300 hover:scale-105 hover:brightness-105"
               />
             </div>
           </div>
@@ -111,33 +111,33 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* HOW IT WORKS - modern Nutella cards */}
-      <section className="py-24 bg-gradient-to-br from-nutella-beige/70 to-white/90">
+      <section className="py-24 bg-gradient-to-br from-nutella-beige/70 to-white/90 animate-fade-in-up">
         <div className="container mx-auto px-6">
           <h2 className="text-5xl font-display font-extrabold text-center text-nutella-brown mb-16 tracking-tight drop-shadow">
             Come funziona?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <Card className="bg-white/95 rounded-3xl p-10 text-center shadow-2xl border-2 border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in">
+            <Card className="bg-white/95 rounded-3xl p-10 text-center shadow-2xl border-2 border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in-up">
               <div className="bg-nutella-green/90 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
-                <Users className="h-12 w-12 text-white" />
+                <Users className="h-12 w-12 text-white icon-pulse" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-nutella-brown">Registrati</h3>
               <p className="text-gray-700 text-lg">
                 Crea un account per iniziare il tuo viaggio nella Nutella Forest.
               </p>
             </Card>
-            <Card className="bg-nutella-green/10 rounded-3xl p-10 text-center shadow-2xl border-2 border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in">
+            <Card className="bg-nutella-green/10 rounded-3xl p-10 text-center shadow-2xl border-2 border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in-up">
               <div className="bg-nutella-green w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
-                <TreeDeciduous className="h-12 w-12 text-white" />
+                <TreeDeciduous className="h-12 w-12 text-white icon-pulse" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-nutella-brown">Pianta un Albero</h3>
               <p className="text-gray-700 text-lg">
                 Usa il codice che trovi nel barattolo Nutella per piantare un albero vero.
               </p>
             </Card>
-            <Card className="bg-nutella-red/10 rounded-3xl p-10 text-center shadow-2xl border-2 border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in">
+            <Card className="bg-nutella-red/10 rounded-3xl p-10 text-center shadow-2xl border-2 border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in-up">
               <div className="bg-nutella-red w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
-                <Award className="h-12 w-12 text-white" />
+                <Award className="h-12 w-12 text-white icon-pulse" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-nutella-brown">Guadagna Badge</h3>
               <p className="text-gray-700 text-lg">
@@ -149,15 +149,15 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* FEATURES - modern Nutella cards */}
-      <section className="py-24 bg-gradient-to-br from-nutella-beige/40 to-white/90">
+      <section className="py-24 bg-gradient-to-br from-nutella-beige/40 to-white/90 animate-fade-in-up">
         <div className="container mx-auto px-6">
           <h2 className="text-5xl font-display font-extrabold text-center text-nutella-brown mb-16 tracking-tight drop-shadow">
             Cosa ti offriamo
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <Card className="bg-white/95 rounded-3xl p-10 shadow-2xl border-2 border-nutella-beige flex items-start gap-8 hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in">
+            <Card className="bg-white/95 rounded-3xl p-10 shadow-2xl border-2 border-nutella-beige flex items-start gap-8 hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in-up">
               <div className="flex-shrink-0">
-                <TreeDeciduous className="h-16 w-16 text-nutella-green" />
+                <TreeDeciduous className="h-16 w-16 text-nutella-green icon-pulse" />
               </div>
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-nutella-brown">Mappa Interattiva</h3>
@@ -166,9 +166,9 @@ const HomePage: React.FC = () => {
                 </p>
               </div>
             </Card>
-            <Card className="bg-white/95 rounded-3xl p-10 shadow-2xl border-2 border-nutella-beige flex items-start gap-8 hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in">
+            <Card className="bg-white/95 rounded-3xl p-10 shadow-2xl border-2 border-nutella-beige flex items-start gap-8 hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in-up">
               <div className="flex-shrink-0">
-                <BarChart className="h-16 w-16 text-nutella-gold" />
+                <BarChart className="h-16 w-16 text-nutella-gold icon-pulse" />
               </div>
               <div>
                 <h3 className="text-2xl font-bold mb-4 text-nutella-brown">Impatto Ambientale</h3>
@@ -182,7 +182,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* CTA - Nutella style */}
-      <section className="py-24 bg-gradient-to-br from-nutella-green/90 to-nutella-gold/80 text-white">
+      <section className="py-24 bg-gradient-to-br from-nutella-green/90 to-nutella-gold/80 text-white animate-fade-in-up">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-5xl md:text-6xl font-display font-extrabold mb-10 drop-shadow-lg text-white">
             Unisciti alla Nutella Forest

@@ -77,9 +77,9 @@ const DashboardPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto py-12 px-4">
+      <div className="container mx-auto py-12 px-4 animate-fade-in-up">
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-nutella-beige/70 via-white/80 to-nutella-gold/20 rounded-3xl p-12 mb-12 shadow-2xl animate-fade-in">
+        <div className="bg-gradient-to-br from-nutella-beige/70 via-white/80 to-nutella-gold/20 rounded-3xl p-12 mb-12 shadow-2xl animate-fade-in-up">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-display font-extrabold text-nutella-brown mb-6 drop-shadow-xl">
               Benvenuto nella tua foresta, <span className="text-nutella-red font-extrabold">{user?.name}</span>
@@ -92,7 +92,7 @@ const DashboardPage: React.FC = () => {
         </div>
 
         {/* Action Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-12 bg-white/90 p-8 rounded-3xl shadow-xl border-2 border-nutella-beige animate-fade-in">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-12 bg-white/90 p-8 rounded-3xl shadow-xl border-2 border-nutella-beige animate-fade-in-up">
           <div className="flex items-center gap-3">
             <TreeDeciduous className="h-8 w-8 text-nutella-green" />
             <h2 className="text-3xl font-semibold text-nutella-brown">I Tuoi Alberi</h2>
@@ -177,7 +177,7 @@ const DashboardPage: React.FC = () => {
             <span className="ml-2 text-lg text-nutella-brown">Caricamento alberi...</span>
           </div>
         ) : trees.length === 0 ? (
-          <div className="text-center py-16 bg-nutella-beige/20 rounded-3xl shadow-md animate-fade-in">
+          <div className="text-center py-16 bg-nutella-beige/20 rounded-3xl shadow-md animate-fade-in-up">
             <TreeDeciduous className="h-16 w-16 text-nutella-green mx-auto mb-4 opacity-70" />
             <h3 className="text-2xl font-semibold text-nutella-brown mb-2">Nessun albero piantato</h3>
             <p className="text-lg text-gray-600 mb-4">
@@ -194,7 +194,7 @@ const DashboardPage: React.FC = () => {
         ) : (
           <>
             {/* Map Preview Section */}
-            <div className="mb-12 bg-white/90 rounded-3xl overflow-hidden shadow-xl border-2 border-nutella-beige animate-fade-in">
+            <div className="mb-12 bg-white/90 rounded-3xl overflow-hidden shadow-xl border-2 border-nutella-beige animate-fade-in-up">
               <div className="w-full h-[400px] relative bg-gray-200">
                 <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center relative rounded-t-3xl">
                   <div className="absolute inset-0 bg-black/20 rounded-t-3xl"></div>
@@ -235,7 +235,7 @@ const DashboardPage: React.FC = () => {
             </div>
 
             {/* Tree Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8 justify-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 animate-fade-in-up">
               {trees.map((tree: Tree) => (
                 <TreeCard 
                   key={tree.id} 
@@ -280,17 +280,17 @@ const TreeCard: React.FC<TreeCardProps> = ({ tree, onClick }) => {
   };
 
   return (
-    <Card className="overflow-hidden hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 border-2 border-nutella-beige bg-white/95 rounded-3xl w-full max-w-xs min-h-[420px] flex flex-col justify-between relative group animate-fade-in">
+    <Card className="overflow-hidden hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 border-2 border-nutella-beige bg-white/95 rounded-3xl w-full max-w-xs min-h-[420px] flex flex-col justify-between relative group animate-fade-in-up">
       <CardHeader className="p-0">
         <img
           src={getTreeImage()}
           alt={`Foto di un albero di specie ${tree.species}`}
-          className="h-56 w-full object-cover rounded-t-3xl border-b-2 border-nutella-beige bg-white group-hover:brightness-110 transition-all duration-300"
+          className="h-56 w-full object-cover rounded-t-3xl border-b-2 border-nutella-beige bg-white group-hover:brightness-110 transition-all duration-300 hover:scale-105"
           onError={e => (e.currentTarget.src = '/placeholder.svg')}
         />
         {/* Badge overlay esempio */}
         <div className="absolute top-4 right-4 z-10">
-          <span className="bg-nutella-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow-md animate-bounce">Badge</span>
+          <span className="bg-nutella-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow-md animate-bounce badge-pulse">Badge</span>
         </div>
       </CardHeader>
       <CardContent className="p-6 flex-1 flex flex-col justify-between">

@@ -83,28 +83,28 @@ const ImpactPage: React.FC = () => {
                 title="CO₂ Assorbita" 
                 value={`${totals.co2Absorbed} kg`} 
                 description="Anidride carbonica rimossa dall'atmosfera"
-                icon={<Cloud className="h-12 w-12" />}
+                icon={<Cloud className="h-12 w-12 icon-pulse" />}
                 color="from-nutella-green/80 to-nutella-darkgreen/80"
               />
               <MetricCard 
                 title="Ossigeno Prodotto" 
                 value={`${totals.oxygenProduced} kg`} 
                 description="Ossigeno rilasciato nell'atmosfera"
-                icon={<Leaf className="h-12 w-12" />}
+                icon={<Leaf className="h-12 w-12 icon-pulse" />}
                 color="from-green-500/80 to-green-700/80"
               />
               <MetricCard 
                 title="Acqua Risparmiata" 
                 value={`${totals.waterSaved} l`} 
                 description="Litri di acqua risparmiati grazie agli alberi"
-                icon={<Droplets className="h-12 w-12" />}
+                icon={<Droplets className="h-12 w-12 icon-pulse" />}
                 color="from-blue-500/80 to-blue-700/80"
               />
               <MetricCard 
                 title="Habitat Creato" 
                 value={`${totals.habitatCreated} m²`} 
                 description="Area di habitat naturale creata"
-                icon={<Globe className="h-12 w-12" />}
+                icon={<Globe className="h-12 w-12 icon-pulse" />}
                 color="from-nutella-brown/80 to-nutella-darkbrown/80"
               />
             </div>
@@ -119,19 +119,19 @@ const ImpactPage: React.FC = () => {
                   title="Equivalente a"
                   value={`${comparisons.kmDriving} km`}
                   description="di guida in auto non effettuati"
-                  icon={<TreeDeciduous className="h-12 w-12 text-nutella-green" />}
+                  icon={<TreeDeciduous className="h-12 w-12 text-nutella-green icon-pulse" />}
                 />
                 <ComparisonCard 
                   title="Ossigeno per"
                   value={`${comparisons.daysBreathing} giorni`}
                   description="di respirazione per una persona"
-                  icon={<Leaf className="h-12 w-12 text-nutella-green" />}
+                  icon={<Leaf className="h-12 w-12 text-nutella-green icon-pulse" />}
                 />
                 <ComparisonCard 
                   title="Pari a"
                   value={`${comparisons.bottlesWater} bottiglie`}
                   description="d'acqua da 1,5 litri risparmiate"
-                  icon={<Droplets className="h-12 w-12 text-nutella-green" />}
+                  icon={<Droplets className="h-12 w-12 text-nutella-green icon-pulse" />}
                 />
               </div>
             </div>
