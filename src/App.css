@@ -1,8 +1,9 @@
+
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;
+  text-align: left;
 }
 
 .logo {
@@ -12,10 +13,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em rgba(226, 33, 28, 0.6));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em rgba(46, 125, 50, 0.6));
 }
 
 @keyframes logo-spin {
@@ -33,10 +34,27 @@
   }
 }
 
-.card {
-  padding: 2em;
+.nutella-card {
+  @apply bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg border border-nutella-beige/50;
 }
 
-.read-the-docs {
-  color: #888;
+.page-container {
+  @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
+
+.section {
+  @apply py-12 md:py-16;
+}
+
+.page-title {
+  @apply text-3xl md:text-4xl lg:text-5xl font-display font-bold text-nutella-brown mb-6;
+}
+
+.page-subtitle {
+  @apply text-xl md:text-2xl font-display text-nutella-brown/80 mb-8;
+}
+
+.container-shadow {
+  box-shadow: 0 10px 30px -15px rgba(93, 64, 55, 0.15);
+}
+

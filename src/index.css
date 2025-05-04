@@ -1,5 +1,6 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -87,6 +88,14 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-nutella-brown;
+  }
+  
+  a {
+    @apply transition-colors duration-300;
+  }
 }
 
 @layer components {
@@ -97,4 +106,67 @@
   .forest-input {
     @apply border-2 border-nutella-beige rounded-lg p-3 w-full focus:border-nutella-green focus:ring-1 focus:ring-nutella-green outline-none transition duration-300;
   }
+  
+  .nutella-card {
+    @apply bg-white rounded-xl shadow-nutella p-6 transition-all duration-300 hover:shadow-nutella-lg border border-nutella-beige/50;
+  }
+  
+  .nutella-button {
+    @apply bg-nutella-green hover:bg-nutella-darkgreen text-white font-medium px-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105;
+  }
+  
+  .nutella-button-secondary {
+    @apply bg-transparent border-2 border-nutella-green text-nutella-green hover:bg-nutella-green/10 font-medium px-6 py-2 rounded-full transition-all duration-300;
+  }
+  
+  .nutella-section {
+    @apply py-12 md:py-20;
+  }
+  
+  .hero-text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-hover {
+    @apply transition-transform duration-300 hover:translate-y-[-5px] hover:shadow-lg;
+  }
+  
+  .badge-glow {
+    @apply animate-pulse-slow;
+  }
 }
+
+/* Custom styling for form elements */
+input, select, textarea {
+  @apply bg-white border-2 border-nutella-beige rounded-lg px-4 py-2 focus:border-nutella-green focus:ring-1 focus:ring-nutella-green outline-none transition duration-300;
+}
+
+button {
+  @apply transition-all duration-300;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animations */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
