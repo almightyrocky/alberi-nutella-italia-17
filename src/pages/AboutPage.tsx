@@ -30,11 +30,11 @@ const AboutPage: React.FC = () => {
               </h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                 Nutella Forest è nato dall'idea di unire la gioia di gustare Nutella con un impatto positivo sul pianeta.
-                Nel 2024, abbiamo lanciato questa iniziativa con l'obiettivo di piantare 1 milione di alberi entro il 2030.
+                Nel 2025, abbiamo lanciato questa iniziativa con l'obiettivo di piantare 1 milione di alberi entro il 2030.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                Ogni barattolo di Nutella contiene un codice unico che ti permette di piantare un albero reale.
-                Questi alberi vengono piantati in aree strategiche del nostro paese, contribuendo alla riforestazione
+                Ogni bicchiere di Nutella contiene un codice unico che ti permette di piantare un albero reale.
+                Questi alberi vengono piantati in aree strategiche del nostro paese e del mondo, contribuendo alla riforestazione
                 e alla creazione di habitat naturali.
               </p>
             </div>
@@ -123,8 +123,8 @@ const AboutPage: React.FC = () => {
                     {step}
                   </div>
                   <div>
-                    {step === 1 && <><h3 className="text-2xl font-bold mb-2 text-nutella-brown">Acquista un Barattolo Nutella</h3><p className="text-lg text-gray-600">Ogni barattolo Nutella Forest contiene un codice unico all'interno della confezione. Questo codice è la chiave per piantare il tuo albero.</p></>}
-                    {step === 2 && <><h3 className="text-2xl font-bold mb-2 text-nutella-brown">Registrati sulla Piattaforma</h3><p className="text-lg text-gray-600">Crea un account sulla piattaforma Nutella Forest inserendo le tue informazioni e il codice trovato nel barattolo.</p></>}
+                    {step === 1 && <><h3 className="text-2xl font-bold mb-2 text-nutella-brown">Acquista un bicchiere Nutella</h3><p className="text-lg text-gray-600">Ogni bicchiere Nutella Forest contiene un codice unico all'interno della confezione. Questo codice è la chiave per piantare il tuo albero.</p></>}
+                    {step === 2 && <><h3 className="text-2xl font-bold mb-2 text-nutella-brown">Registrati sulla Piattaforma</h3><p className="text-lg text-gray-600">Crea un account sulla piattaforma Nutella Forest inserendo le tue informazioni e il codice trovato nel bicchiere.</p></>}
                     {step === 3 && <><h3 className="text-2xl font-bold mb-2 text-nutella-brown">Pianta il Tuo Albero</h3><p className="text-lg text-gray-600">Dagli un nome al tuo albero e scopri la sua posizione esatta nella foresta Nutella. Riceverai informazioni sulla specie e sul suo contributo all'ambiente.</p></>}
                     {step === 4 && <><h3 className="text-2xl font-bold mb-2 text-nutella-brown">Monitora la Crescita</h3><p className="text-lg text-gray-600">Segui lo sviluppo del tuo albero nel tempo attraverso la nostra piattaforma. Potrai vedere quanto CO₂ ha assorbito, quanta acqua ha conservato e altri dati ambientali.</p></>}
                   </div>
@@ -136,13 +136,13 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-br from-nutella-white via-nutella-gold/80 to-nutella-green/80 text-white rounded-t-3xl shadow-2xl animate-fade-in">
+      <section className="py-20 bg-gradient-to-br from-nutella-brown via-nutella-gold/80 to-nutella-green/80 text-white rounded-t-3xl shadow-2xl animate-fade-in">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-display font-extrabold mb-8 drop-shadow-lg">
             Unisciti a Noi in Questa Missione Verde
           </h2>
           <p className="text-2xl mb-10 max-w-3xl mx-auto drop-shadow">
-            Ogni albero conta. Ogni barattolo di Nutella può fare la differenza. Insieme, possiamo creare un futuro più sostenibile.
+            Ogni albero conta. Ogni bicchiere di Nutella può fare la differenza. Insieme, possiamo creare un futuro più sostenibile.
           </p>
         </div>
       </section>

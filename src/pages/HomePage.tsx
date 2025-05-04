@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
               Pianta un albero grazie al tuo bicchiere di <span className="inline-flex"><span className="text-black">n</span><span className="text-nutella-red">utella</span></span>
             </h1>
             <p className="text-2xl md:text-3xl mb-10 text-nutella-brown/90 drop-shadow font-medium max-w-xl">
-              Entra a far parte della <span className="font-bold text-nutella-gold">Nutella Forest</span>: ogni barattolo di Nutella contribuisce alla riforestazione e alla sostenibilità del nostro pianeta.
+              Entra a far parte della <span className="font-bold text-nutella-gold">Nutella Forest</span>: ogni bicchiere di Nutella contribuisce alla riforestazione e alla sostenibilità del nostro pianeta.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full">
               <Button
@@ -132,7 +132,7 @@ const HomePage: React.FC = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4 text-nutella-brown">Pianta un Albero</h3>
               <p className="text-gray-700 text-lg">
-                Usa il codice che trovi nel barattolo Nutella per piantare un albero vero.
+                Usa il codice che trovi nel bicchiere di Nutella per piantare un albero vero.
               </p>
             </Card>
             <Card className="bg-nutella-red/10 rounded-3xl p-10 text-center shadow-2xl border-2 border-nutella-beige hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fade-in-up">
@@ -188,7 +188,7 @@ const HomePage: React.FC = () => {
             Unisciti alla Nutella Forest
           </h2>
           <p className="text-2xl md:text-3xl mb-12 max-w-3xl mx-auto drop-shadow">
-            Ogni albero conta. Contribuisci a rendere il nostro pianeta più verde, un barattolo di Nutella alla volta.
+            Ogni albero conta. Contribuisci a rendere il nostro pianeta più verde, un bicchiere di Nutella alla volta.
           </p>
           <div className="flex justify-center items-center gap-8 flex-wrap">
             <Button
