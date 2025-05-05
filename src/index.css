@@ -85,10 +85,14 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Montserrat', Arial, sans-serif;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-nutella-brown;
+  h1, h2, h3, h4, h5, h6, .font-display {
+    /* @apply font-display; */
+    @apply text-nutella-brown;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
   }
   
   a {
@@ -111,6 +115,8 @@
   
   .nutella-button {
     @apply bg-nutella-green hover:bg-nutella-darkgreen text-white font-medium px-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 600;
   }
   
   .nutella-button-secondary {
@@ -139,8 +145,10 @@ input, select, textarea {
   @apply bg-white border-2 border-nutella-beige rounded-lg px-4 py-2 focus:border-nutella-green focus:ring-1 focus:ring-nutella-green outline-none transition duration-300;
 }
 
-button {
+button, .btn {
   @apply transition-all duration-300;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
 }
 
 /* Smooth scrolling */
