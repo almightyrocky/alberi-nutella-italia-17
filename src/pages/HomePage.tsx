@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
         <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-16">
           <div className="md:w-1/2 flex flex-col items-start justify-center">
             <h1 className="text-6xl md:text-7xl font-display font-extrabold mb-8 text-nutella-brown drop-shadow-2xl leading-tight tracking-tight">
-              Pianta un albero grazie al tuo bicchiere di <span className="inline-flex"><span className="text-black">n</span><span className="text-nutella-red">utella</span></span>
+              Un bicchiere <span className="inline-flex"><span className="text-black">n</span><span className="text-nutella-red">utella</span></span> = un albero
             </h1>
             <p className="text-2xl md:text-3xl mb-10 text-nutella-brown/90 drop-shadow font-medium max-w-xl">
               Entra a far parte della <span className="font-bold text-nutella-gold">Nutella Forest</span>: ogni bicchiere di Nutella contribuisce alla riforestazione e alla sostenibilità del nostro pianeta.
