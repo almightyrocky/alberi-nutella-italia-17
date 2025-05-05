@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
   return (
     <Layout>
       {/* HERO SECTION - Nutella style, glass effect, big logo, CTA */}
-      <section className="relative py-24 md:py-36 overflow-hidden bg-gradient-to-br from-nutella-beige/90 via-white/90 to-nutella-gold/20 animate-fade-in-up">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-16 pb-20">
         <div className="absolute inset-0 z-0">
           <img 
             src="/SFONDO HERO.jpg" 
